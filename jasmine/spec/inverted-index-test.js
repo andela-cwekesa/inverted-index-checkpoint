@@ -18,6 +18,10 @@ describe("Read book data", function() {
     it("verifies that JSON file passed is not empty", function() {
         expect(testData.length > 0).toBeTruthy();
     }); 
+    // Test spec to verify the content in file is array
+    it("shoud ensure that the file content is actually a valid JSON Array" , function () {
+        expect(Array.isArray(testData)).toBeTruthy();
+    });
     //Test spec that ensures file contains only string
     it("should ensure that each object in JSON array contains a property whose value is a string" , function() {
     	testData.forEach(function(element){
