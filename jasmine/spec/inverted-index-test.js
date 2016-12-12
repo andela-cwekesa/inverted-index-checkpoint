@@ -11,7 +11,7 @@ var testData =  [
   }
 ]
 
-//Test suite that read the JSON file containing book data
+//Read book data Test suite that read the JSON file containing book data
 describe("Read book data", function() {
     
     // Test spec one that verifies file is not empty
@@ -31,6 +31,7 @@ describe("Read book data", function() {
     });
 });
 
+//Populate Index test suite
 describe("Populate Index" , function() {
     it("should ensure index is created once JSON file has been read", function () {
 
