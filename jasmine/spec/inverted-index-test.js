@@ -30,3 +30,17 @@ describe("Read book data", function() {
     	});
     });
 });
+
+describe("Populate Index" , function() {
+    it("should ensure index is created once JSON file has been read", function () {
+
+        //file object 
+        var jsonfile = {
+            name: "testFile",
+        };
+
+        var created = createIndex(file);
+
+        expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
+    });
+})
