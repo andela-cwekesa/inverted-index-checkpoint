@@ -1,0 +1,32 @@
+{
+  "name": "inverted-index-check-point-one",
+  "version": "1.0.0",
+  "description": "Inverted index checkpoint one ",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "node_modules/.bin/karma start jasmine/karma.conf.js --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-cwekesa/inverted-index-check-point-one.git"
+  },
+  "keywords": [
+    "Collins",
+    "Wekesa",
+    "Check",
+    "point",
+    "one"
+  ],
+  "author": "Collins Wekesa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-cwekesa/inverted-index-check-point-one/issues"
+  },
+  "homepage": "https://github.com/andela-cwekesa/inverted-index-check-point-one#readme",
+  "devDependencies": {
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0"
+  }
+}
