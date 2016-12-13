@@ -22,7 +22,7 @@ describe("Read book data", function() {
     it("shoud ensure that the file content is actually a valid JSON Array" , function () {
         expect(Array.isArray(testData)).toBeTruthy();
     });
-    //Test spec that ensures file contains only string
+    // Test spec that ensures file contains only string
     it("should ensure that each object in JSON array contains a property whose value is a string" , function() {
     	testData.forEach(function(element){
     		expect(typeof element.title === "string").toBeTruthy();
@@ -31,7 +31,7 @@ describe("Read book data", function() {
     });
 });
 
-//Populate Index test suite
+// Populate Index test suite
 describe("Populate Index" , function() {
     it("should ensure index is created once JSON file has been read", function () {
 
@@ -40,8 +40,29 @@ describe("Populate Index" , function() {
             name: "testFile",
         };
 
-        var created = createIndex(file);
+        var created = createIndex(jsonile);
 
         expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
     });
-})
+});
+
+
+// Search index test suite
+// I have used a custom jasmine matcher
+describe("Search index" , function() {
+    beforeEach(function() {
+        var hitz = []; // initialize an empty array that will hold search hits
+        jasmine.addMatchers({
+        toHaveSomething:function(){
+            hitz.length >0;
+        }
+    })
+    });
+
+    it("test that verifies that searching the index returns an array of the indices.", function(){
+        // hitz = searchIndex(testData);
+        // expect(hits.length > 0).toContain("Lord")
+        hitz = searchIndex(testData);
+        expect(hitz).toHaveSomething;
+    });
+});
