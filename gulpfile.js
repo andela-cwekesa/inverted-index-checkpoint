@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 
 var browserSync1 = require("browser-sync").create();
 var browserSync2 = require("browser-sync").create();
-var browserSync = require("browser-sync");
+var browserSync = require("browser-sync").create();
 
 gulp.task("default", ["front","test"]);
 
