@@ -40,7 +40,7 @@ describe("Populate Index" , function() {
             name: "testFile",
         };
 
-        var created = createIndex(jsonile);
+        var created = createIndex(jsonfile);
 
         expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
     });
