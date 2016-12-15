@@ -1,6 +1,7 @@
 /**
  * This file is dependent on gulp which automate tasks.
  *Author : Collins
+
  */
 
 var gulp = require('gulp'),
@@ -42,12 +43,13 @@ gulp.task('front', function () {
         server : {
             baseDir: "./public"
         },
-        port : 3001,
+        port : 3002,
         ui: {
             port:3070
         }
     });
     // tracks html,js and css changes 
+    // I have used to allow reload
     gulp.watch("./public/**/*.{html,js,css}").on("change", browserSync1.reload);
 });
 
@@ -66,4 +68,3 @@ gulp.task("test", function () {
     gulp.watch('./jasmine/spec/*.js').on("change",browserSync2.reload);
     gulp.watch("./public/src/*.js").on("change", browserSync2.reload);
 }); 
-// end tasks
