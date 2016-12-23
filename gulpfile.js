@@ -1,6 +1,6 @@
 /**
  * This file is dependent on gulp which automate tasks.
- *Author : Collins
+ *Author : # Collins
 
  */
 
@@ -68,3 +68,4 @@ gulp.task("test", function () {
     gulp.watch('./jasmine/spec/*.js').on("change",browserSync2.reload);
     gulp.watch("./public/src/*.js").on("change", browserSync2.reload);
 }); 
+// end tasks
