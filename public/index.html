@@ -11,6 +11,8 @@
 
     <title>Inverted Index v1.0</title>
 
+    <!--<script type="text/javascript" src="http://code.angularjs.org/1.2.2/angular.min.js"></script>-->
+
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,7 +22,12 @@
     <!-- Custom CSS -->
     <link href="design/css/main.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="progress.css">
 
+    <script src="angularjs/angular.js"></script>
+    <script src="angularjs/ng-file-upload-shim.js"></script>
+    <script src="angularjs/ng-file-upload.js"></script>
+    <script type="text/javascript" src="angularjs/file.js"></script>
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -81,7 +88,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12 alert alert-info" style="margin-top: 5px">
-                    <h1 class="page-header" style="margin-left: 230px"><button class="btn btn-success"><i class="fa fa-circle-o-notch fa-spin"></i> Running</button> Inverted Index  &nbsp;<button class="btn btn-danger"><i class="fa fa-warning"></i> Stop </button></h1> 
+                    <h1 class="page-header" style="margin-left: 230px"><button class="btn btn-success"><i class="fa fa-circle-o-notch fa-spin"></i> Watching changes...</button> Inverted Index  &nbsp;</h1> 
                 
             </div>
             
@@ -133,25 +140,32 @@
                               <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title"> <i class="fa fa-info-circle"></i> Please Select a JSON File Only.</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form  method="post" action="" name="form1">
-                                       <div class="form-group">
-                                        <input type="file" name="upload" class="form-control" required>
-                                       </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal"><i class="fa fa-remove" aria-hidden="true"></i> Cancel</button>
-                                        <button type="submit" name="action" class="btn btn-primary" style="width:100px"><i class="fa fa-save"></i> Save</button>
-                                    </div>
-                                </form>
-     
-                                </div>
                             </div>
-                        </div>
-                        </div>
-    <script> $('#upload').modal(show); </script>
+                <div class="modal-body">
+                <body ng-app="fileUpload" ng-controller="fileController">
+      <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+          accept="json/*" ng-model="file" ngf-max-height="1000" ngf-max-size="1MB" class="btn btn-primary">
+      Select File</button>
+  <br><br>
+ 
+  <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+      <span class="progress " ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"  
+               ng-bind="f.progress + '%'"></div>
+      </span>
+  </div>     
+ <button type="button" id="myBtn" class="btn btn-success" disabled="" ><i class="fa fa-cogs fa-spin"></i> Create Index</button>
+</body>                
+  </div>     
+  {{errorMsg}}
+  <script>
 
-
+</script>
+     
+</div>
+</div>
+</div>
+</div>
 </body>
 
 </html>

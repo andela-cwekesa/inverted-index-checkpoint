@@ -12,7 +12,7 @@ app.controller('fileController', ['$scope', 'Upload', '$timeout', function ($sco
         $scope.errFile = errFiles && errFiles[0];
         if (file) {
             file.upload = Upload.upload({
-                url: 'http://127.0.0.1:8080/uploads',
+                url: '127.0.0.1',
                 data: {file: file}
             });
 
@@ -23,6 +23,8 @@ app.controller('fileController', ['$scope', 'Upload', '$timeout', function ($sco
             }, function (response) {
                 if (response.status > 0)
                     $scope.errorMsg = response.status + ': ' + response.data;
+                    $scope.x = document.getElementById("myBtn");
+                    $scope.x.disabled = false;
             }, function (evt) {
                 file.progress = Math.min(100, parseInt(100.0 * 
                                          evt.loaded / evt.total));
@@ -30,6 +32,7 @@ app.controller('fileController', ['$scope', 'Upload', '$timeout', function ($sco
         }
     }
 }]) */
+
 var app = angular.module("myApp", []);
 
 myapp.directive("myDirective", ["$window", function ($window) {
@@ -79,4 +82,3 @@ myapp.directive("myDirective", ["$window", function ($window) {
         }
     };
 }]);
-

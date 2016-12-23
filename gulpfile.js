@@ -57,12 +57,12 @@ gulp.task("test", function () {
 
     browserSync2.init({
         server: {
-          baseDir: ["./public/src/", "./jasmine"],
+          baseDir: ["./public/src/", "./jasmine"]},
           port: 3080,
           ui: {
               port: 3090
           }
-      }
+      //}
     });
 
     gulp.watch('./jasmine/spec/*.js').on("change",browserSync2.reload);
