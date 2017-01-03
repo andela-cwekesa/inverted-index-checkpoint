@@ -45,34 +45,79 @@ describe("Read book data", function() {
 
 // Populate Index test suite
 describe("Populate Index" , function() {
+
+    // Test spec that ensures index is created once JSON file has been read.
     it("should ensure index is created once JSON file has been read", function () {
 
         // file object 
         var jsonfile = {
             name: "testFile",
+            files: testData[0]
         };
         var obj = new Index();
-         console.log(obj)
+         //console.log(getIndex);
         var created = obj.createIndex(jsonfile);
 
         expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
     });
+
+    it("should ensure that the file passed is not empty" , function  () {
+        var jsonfile = {
+            name: "testFile",
+            files: ""
+        };
+        var obj = new Index();
+        var created = obj.createIndex(jsonfile);
+        expect(created.status).toBeFalsy();
+        expect(created.message).toBe(jsonfile.name + "is empty!")
+    });
+
+    /*it('checks if string keys map to the correct object in the object array', function () {
+      var jsonfile = {
+        name: "testFile",
+        files:testData
+      };
+      var obj = new Index() ,
+      path = '/jasmine/books.json';
+      var created = obj.createIndex(jsonfile);
+      expect(created.container.alice).toEqual([0]);
+      expect(created.container.rings).toEqual([1]);
+      expect(created.container.a).toEqual([0, 1]);
+    });*/
+
+    /*it("should ensure a json file only is uploaded" , function () {
+        var jsonfile = {
+            name : "testFile" ,
+            files: "json"
+        };
+        var obj = new Index();
+        var created = obj.createIndex(jsonfile);
+        expect(created.status).toBeFalsy();
+        expect(created.message).toBe(jsonfile.name + "is not a json file!")
+    });*/
 });
 
 describe("Check existence" , function() {
-    it("should check createIndex method exists" , function() {
+
+    // Test spec to check as to whether createIndex method exist
+   /* it("should check createIndex method exists" , function() {
         // console.log(Index)
-        var obj = new Index()
+        var obj = new Index();
         var indexy = obj.createIndex();
         expect(indexy).toBeTruthy();
-    });
+    }); */
+
+    // Test spec to check as to whether searchIndex method exist
     it("should check that searchIndex method exists" , function() {
-        var obj = new Index()
+        var obj = new Index();
         var searchy = obj.searchIndex();
         expect(searchy).toBeTruthy();
+        console.log(searchy)
     });
+
+    // Test spec to check as to whether getIndex method exist
     it("should check that getIndex method exists" , function() {
-        var obj = new Index()
+        var obj = new Index();
         var gety = obj.getIndex();
         expect(gety).toBeTruthy();
     });
@@ -83,10 +128,10 @@ describe("Check existence" , function() {
 // I have used a custom jasmine matcher
 describe("Search index" , function() {
     beforeEach(function() {
-        var hitz = []; // initialize an empty array that will hold search hits
+        var hits = []; // initialize an empty array that will hold search hits
         jasmine.addMatchers({
         toHaveSomething:function(){
-            hitz.length >0;
+            hits.length >0;
         }
     })
     });
@@ -98,4 +143,5 @@ describe("Search index" , function() {
         hitz = obj.searchIndex(testData);
         expect(hitz).toHaveSomething;
     });
+    
 });
