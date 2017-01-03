@@ -4,33 +4,8 @@
   "description": "Inverted index checkpoint one ",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "node_modules/.bin/karma start jasmine/karma.conf.js --single-run",
+    "test": "node_modules/.bin/karma start jasmine/karma.conf.js --single-run" ,
     "coverage": "node_modules/.bin/istanbul cover ./node_modules/.bin/karma --report lcovonly -- -R spec ./jasmine/spec/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/andela-Bgathu/inverted-index.git"
-    },
-    "author": "Andela-Bgathu",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/andela-Bgathu/inverted-index/issues"
-    },
-    "homepage": "https://github.com/andela-Bgathu/inverted-index#readme",
-    "devDependencies": {
-        "browser-sync": "^2.18.5",
-        "coveralls": "^2.11.15",
-        "gulp": "^3.9.1",
-        "gulp-jasmine": "^2.4.2",
-        "gulp-jshint": "^2.0.4",
-        "gulp-open": "^2.0.0",
-        "gulp-sass": "^3.0.0",
-        "istanbul": "^0.4.5",
-        "jshint": "^2.9.4",
-        "mocha": "^3.2.0"
-    }
-}
-
   },
   "repository": {
     "type": "git",
