@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     cleanCSS = require('gulp-clean-css'),
     jshint = require('gulp-jshint'),
     livereload = require('gulp-livereload');
+    coveralls = require('gulp-coveralls');
 
 var browserSync1 = require("browser-sync").create();
 var browserSync2 = require("browser-sync").create();
@@ -54,6 +55,7 @@ gulp.task('front', function () {
 });
 
 gulp.task("test", function () {
+  .pipe(coveralls());
 
     browserSync2.init({
         server: {
