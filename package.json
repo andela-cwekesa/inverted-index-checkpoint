@@ -34,7 +34,11 @@
   },
   "dependencies": {
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.3.2",
     "gulp-cli": "^1.2.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "gulp-livereload": "^3.8.1",
     "jasmine-core": "^2.5.2"
   }
 }
