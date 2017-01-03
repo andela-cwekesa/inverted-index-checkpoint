@@ -4,7 +4,7 @@
   "description": "Inverted index checkpoint one ",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "node node_modules/gulp-cli/bin/gulp"
+    "test": "node node_modules/gulp-cli/bin/gulp test"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "karma-phantomjs2-launcher": "^0.5.0"
   },
   "dependencies": {
+    "gulp-cli": "^1.2.2",
     "jasmine-core": "^2.5.2"
   }
 }
