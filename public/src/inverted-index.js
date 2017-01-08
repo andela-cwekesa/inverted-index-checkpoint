@@ -1,6 +1,6 @@
  let Index = (function () {
     const that = this;
-    let container = {};
+     const container = {};
 
     this.fileCheck=(fileContents) => {
     if (fileContents.files === undefined) {
@@ -28,22 +28,6 @@
     }
 };
 
-this.searchCheck = (searchQuery) => {
-    if (typeof searchQuery === "string") {
-        let splitted = searchQuery.split(' ');
-        return {
-            type: "string" ,
-            wordsType: splitted
-        }
-    }
-    else if(Array.isArray(searchQuery)) {
-        let splitted = searchQuery;
-        return {
-            type: "array" ,
-            wordsType: splitted
-        }
-    }
-};
 
  // method that sanitizes  input
  this.sanitizeInput = (content)=> {
@@ -52,7 +36,7 @@ this.searchCheck = (searchQuery) => {
   };
   // method that check as to whether word has been indexed
     this.checkIndex = (words , file , source , id ) => {
-        words.forEach(function (word) {
+        words.forEach( (word) => {
             let newWord = that.sanitizeInput(word);
             // check if newWord has been indexed before
             if (container[file][newWord] === undefined) {
@@ -76,15 +60,15 @@ this.searchCheck = (searchQuery) => {
 // method that creates indices
     this.createIndex = (fileContents)=>{
         let check = this.fileCheck(fileContents);
-        console.log(check)
         if(check.type === "Empty")
         {
-            return check;
+            
+            alert('It looks like you uploaded an empty JSON file.');
 
         }
         else if(check.type === "Bad Format")
         {
-            return check;
+            alert('It looks like the file is in bad format.');
         }
         else if (check.type === "Valid") {
                 let docs = fileContents.files;
@@ -108,7 +92,7 @@ Object.keys(container).forEach(function(key) {
 
 });
 console.log(test);*/
-for (let [key,value] in container){console.log(key);}
+//for (let [key,value] in container){console.log(key);}
                 for (let i = 0; i < docs.length; i++) {
                     let f = docs[i];
                     // split title into an array
@@ -120,6 +104,7 @@ for (let [key,value] in container){console.log(key);}
 
 
                 }
+        
                 return check;
             }
     }
@@ -133,25 +118,14 @@ for (let [key,value] in container){console.log(key);}
     }
   
 // search method
-let testing =[
-  {
-    "title": "Alice in Wonderland",
-    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
-  },
-
-  {
-    "title": "alice The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
-  }
-]
-    //}
 
     this.search = (termsArray ,fName) => {
         let searchResults = {};
         //fName = new Object();
+        console.log(fName);
         termsArray.forEach(function(i ,j){
             console.log(fName);
-            if (fName.indexOf(i) != undefined){
+            if (this.fName.indexOf(i)){
                 searchResults[termsArray[j]] = fName[i];
             }
             else {
@@ -171,13 +145,20 @@ let testing =[
             termsArray = searchTerm;
         }
         if (!currFile) {
-            for (let i in container) {
-                searchResults[i] = this.search(termsArray , container[i])
+            for (let i in this.container) {
+                searchResults[i] = this.search(termsArray , this.container[i]);
             }
         }
         else{
-            let file =  container[currFile];
+            try{
+            let file =  this.container[currFile];
             searchResults[file] = this.search(termsArray , file);
+        }
+        catch(e){
+               console.log("Error:",e)
+               
+            }
+
         }
         return searchResults;
         console.log(searchResults)
