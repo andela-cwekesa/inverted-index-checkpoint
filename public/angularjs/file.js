@@ -33,26 +33,34 @@ app.controller('fileController', ['$scope', 'Upload', '$timeout', function ($sco
     }
 }]) */
 
-var app = angular.module("myApp", []);
+let app = angular.module("myApp", []);
 
-myapp.directive("myDirective", ["$window", function ($window) {
+app.directive("fileChange", ["$window",  ($window) => {
     return {
-        // both Element(E) names and Attribute(A) names can invoke the directive(which is myDirective)
+        // both Element(E) names and Attribute(A) names can invoke the directive
         restrict: "EA",
         require: "ngModel",
-        link: function (scope, element, attr, control) {
+        link:  (scope, element, attr, control) => {
             // FileReader is used to read the contents of a file
             // create constructor
-            var reader = new FileReader();
+            const reader = new FileReader;
 
             // declares name of the file
-            var file = 0;
+            //let file = 0;
             
             // get access to element that triggered an event
-            element.bind("change", function (fc) {
+            element.bind("change",  (fc) => {
                 // Retrieve the first file from the FileList object
-                var fileContents = fc.target.files[0];
-                if(!fileContents)
+                let fileContents = fc.target.files[0];
+                if (fileContents.name.indexOf('json') >= 0) {
+                    file = fileContents.name;
+                    // reading data in the file
+                    let check = reader.readAsText(fileContents);
+                    
+                } else {
+                    alert("Please , strictly select a JSON file.");
+                }
+                /*if(!fileContents)
                 {
                     alert("Failed to load file");
                 } 
@@ -64,21 +72,103 @@ myapp.directive("myDirective", ["$window", function ($window) {
                 {
                     file = fileContents.name;
                     var readFileData = reader.readAsText(fileContents);
-                }
+                }*/
+                
                 
             });
             // fires immediately when an object has been loaded
-            reader.onload = function () {
+            reader.onload = () => {
                 // control change the view value
                 control.$setViewValue({
                     name: file,
-                    files: scope.$eval(fileReader.result)
+                    files: scope.$eval(reader.result)
                 });
 
-                if (attrs.fileLoaded) {
+                if (attr.fileLoaded) {
                     scope.$eval(attr.fileLoaded);
                 }
             };
         }
     };
-}]);
+}]); 
+
+app.controller('myController' ,  ($scope , $timeout) => {
+    $scope.beforeIndex = {}; // object to hold the json files ready to be indexed
+    $scope.container = {};
+    //$scope.set = {};
+    
+    //$scope.searchResults = [];
+    $scope.message = {
+        status: false,
+        message:false
+    };
+    $scope.loadFile =  () => {
+        $timeout(function () {
+            $scope.beforeIndex[$scope.file.name] = angular.copy($scope.file);
+        } , 200); // loads file after 200 microseconds
+    }
+
+    $scope.createIndex = (fName) => {
+        
+        let fileContents = $scope.beforeIndex[fName];
+        let obj = new Index();
+        console.log(obj)
+        let success = obj.createIndex(fileContents);
+        
+        if (success.status) {
+            alert ('The operation was successful.');
+            $scope.msg = {
+                message:success.message,
+                status:true
+            };
+            let result = obj.getIndex();
+            let fileLength = result[fileContents.name].uploadedFile;
+
+            $timeout(function () {
+                $scope.container[fileContents.name] = {
+                    dataAfterIndexed: result[fileContents.name],
+                    length: (function () {
+                        let emptyArray = [];
+                        $scope.disp = emptyArray;
+                        for (let x = 0; x < fileLength.length; x++) {
+                            emptyArray.push(x);
+                        }
+                        return emptyArray;
+                        //console.log(emptyArray);
+                    })()
+                }
+            }, 200);
+        } else {
+            $scope.msg = {
+                message:success.message,
+                status:false,
+                error:true
+            };
+        }
+        //for (let [key,value] in $scope.beforeIndex){console.log(value.name);}
+    }
+
+    $scope.searchIndex = function () {
+        let obj = new Index();
+        let fName = $scope.selectedFile;
+        let txtSearch = $scope.txtSearch;
+        if (!txtSearch) {
+            alert('You haven\'t provided anything to be searched.');
+        }
+        else if (Object.keys($scope.beforeIndex).length <= 0) {
+            alert('Unable to find an indexed file')
+        }
+        else{
+            $scope.searchResults = obj.searchIndex(fName , txtSearch)
+        }
+        for(let i in $scope.searchResults){
+            $scope.beforeIndex[i] = {
+                name:i,
+                index:$scope.searchResults[i],
+                //doc:$scope.obj.container[i]
+            }
+        }
+
+    }
+});
+
