@@ -25,7 +25,9 @@ Elasticsearch uses a structure called an inverted index, which is designed to al
 6.Jasmine<br>
 
 
-### Licence
+### <u>Licence</u>
+
+MIT 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 'Software'), to deal in the Software without restriction, including
