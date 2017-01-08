@@ -42,7 +42,7 @@ app.directive("fileChange", ["$window",  ($window) => {
         require: "ngModel",
         link:  (scope, element, attr, control) => {
             // FileReader is used to read the contents of a file
-            // create constructor
+            
             const reader = new FileReader;
 
             // declares name of the file
@@ -76,7 +76,7 @@ app.directive("fileChange", ["$window",  ($window) => {
                 
                 
             });
-            // fires immediately when an object has been loaded
+            
             reader.onload = () => {
                 // control change the view value
                 control.$setViewValue({
@@ -93,15 +93,9 @@ app.directive("fileChange", ["$window",  ($window) => {
 }]); 
 
 app.controller('myController' ,  ($scope , $timeout) => {
-    $scope.beforeIndex = {}; // object to hold the json files ready to be indexed
+    $scope.beforeIndex = {}; 
     $scope.container = {};
-    //$scope.set = {};
     
-    //$scope.searchResults = [];
-    $scope.message = {
-        status: false,
-        message:false
-    };
     $scope.loadFile =  () => {
         $timeout(function () {
             $scope.beforeIndex[$scope.file.name] = angular.copy($scope.file);
@@ -117,10 +111,7 @@ app.controller('myController' ,  ($scope , $timeout) => {
         
         if (success.status) {
             alert ('The operation was successful.');
-            $scope.msg = {
-                message:success.message,
-                status:true
-            };
+            
             let result = obj.getIndex();
             let fileLength = result[fileContents.name].uploadedFile;
 
@@ -139,11 +130,7 @@ app.controller('myController' ,  ($scope , $timeout) => {
                 }
             }, 200);
         } else {
-            $scope.msg = {
-                message:success.message,
-                status:false,
-                error:true
-            };
+            alert('The operation was not successful.');
         }
         //for (let [key,value] in $scope.beforeIndex){console.log(value.name);}
     }
