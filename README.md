@@ -17,9 +17,9 @@ Elasticsearch uses a structure called an inverted index, which is designed to al
 4.Run the application by typing <code>gulp</code>
 
 ### Technologies Used
-1. Javascript (ES6) <br>
-2. AngularJs<br>
-3. Node<br>
+1.Javascript (ES6) <br>
+2.AngularJs<br>
+3.Node<br>
 4.HTML<br>
 5.Bootstrap<br>
 6.Jasmine<br>
