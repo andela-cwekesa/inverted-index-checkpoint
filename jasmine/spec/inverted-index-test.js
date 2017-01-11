@@ -11,7 +11,7 @@ const testData =  [
     "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
   }
 ]
-var obj = new Index();
+const obj = new Index();
 
 // Read book data Test suite that read the JSON file containing book data
 describe("Read book data", () => {
