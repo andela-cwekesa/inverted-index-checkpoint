@@ -26,6 +26,13 @@
             message : fileContents.name + "is not a json file!"
         };
     }
+    else{
+        return message = {
+            type: "invalidFormat" ,
+            status: true,
+            message : fileContents.name + "is invalid format file!"
+        }
+    }
 };
 
 
@@ -67,7 +74,7 @@
             alert('It looks like you uploaded an empty JSON file.');
 
         }
-        else if(check.type === "Invalid Format")
+        else if(check.type === "invalidFormat")
         {
             alert('It looks like the file is in bad format.');
         }
