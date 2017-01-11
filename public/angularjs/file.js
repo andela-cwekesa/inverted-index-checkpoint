@@ -1,37 +1,3 @@
-/*var app = angular.module('fileUpload', ['ngFileUpload']);
-app.config(function ($httpProvider) {
-  $httpProvider.defaults.headers.common = {};
-  $httpProvider.defaults.headers.post = {};
-  $httpProvider.defaults.headers.put = {};
-  $httpProvider.defaults.headers.patch = {};
-});
-
-app.controller('fileController', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
-    $scope.uploadFiles = function(file, errFiles) {
-        $scope.f = file;
-        $scope.errFile = errFiles && errFiles[0];
-        if (file) {
-            file.upload = Upload.upload({
-                url: '127.0.0.1',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
-                });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-                    $scope.x = document.getElementById("myBtn");
-                    $scope.x.disabled = false;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 * 
-                                         evt.loaded / evt.total));
-            });
-        }
-    }
-}]) */
 
 let app = angular.module("myApp", []);
 
@@ -45,9 +11,6 @@ app.directive("fileChange", ["$window",  ($window) => {
             
             const reader = new FileReader;
 
-            // declares name of the file
-            //let file = 0;
-            
             // get access to element that triggered an event
             element.bind("change",  (fc) => {
                 // Retrieve the first file from the FileList object
@@ -60,19 +23,6 @@ app.directive("fileChange", ["$window",  ($window) => {
                 } else {
                     alert("Please , strictly select a JSON file.");
                 }
-                /*if(!fileContents)
-                {
-                    alert("Failed to load file");
-                } 
-                else if (!file.type.match('json')) 
-                {
-                    alert(fileContents.name + " is not a valid JSON file.");
-                } 
-                else 
-                {
-                    file = fileContents.name;
-                    var readFileData = reader.readAsText(fileContents);
-                }*/
                 
                 
             });
@@ -93,8 +43,10 @@ app.directive("fileChange", ["$window",  ($window) => {
 }]); 
 
 app.controller('myController' ,  ($scope , $timeout) => {
+
     $scope.beforeIndex = {}; 
     $scope.container = {};
+    let obj = new Index();
     
     $scope.loadFile =  () => {
         $timeout(function () {
@@ -103,9 +55,7 @@ app.controller('myController' ,  ($scope , $timeout) => {
     }
 
     $scope.createIndex = (fName) => {
-        
         let fileContents = $scope.beforeIndex[fName];
-        let obj = new Index();
         console.log(obj)
         let success = obj.createIndex(fileContents);
         
@@ -125,18 +75,15 @@ app.controller('myController' ,  ($scope , $timeout) => {
                             emptyArray.push(x);
                         }
                         return emptyArray;
-                        //console.log(emptyArray);
                     })()
                 }
             }, 200);
         } else {
             alert('The operation was not successful.');
         }
-        //for (let [key,value] in $scope.beforeIndex){console.log(value.name);}
     }
 
     $scope.searchIndex = function () {
-        let obj = new Index();
         let fName = $scope.selectedFile;
         let txtSearch = $scope.txtSearch;
         if (!txtSearch) {
@@ -152,7 +99,6 @@ app.controller('myController' ,  ($scope , $timeout) => {
             $scope.beforeIndex[i] = {
                 name:i,
                 index:$scope.searchResults[i],
-                //doc:$scope.obj.container[i]
             }
         }
 
