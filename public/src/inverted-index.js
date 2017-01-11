@@ -1,6 +1,6 @@
  let Index = (function () {
     const that = this;
-     const container = {};
+     let container = {};
 
     this.fileCheck=(fileContents) => {
     if (fileContents.files === undefined) {
@@ -42,7 +42,7 @@
             if (container[file][newWord] === undefined) {
                 
                 container[file][newWord] = {};
-                // fill container with data
+               
                 container[file][newWord][id] = {
                     source: source,
                     file:file
@@ -59,6 +59,7 @@
 
 // method that creates indices
     this.createIndex = (fileContents)=>{
+        
         let check = this.fileCheck(fileContents);
         if(check.type === "Empty")
         {
@@ -66,7 +67,7 @@
             alert('It looks like you uploaded an empty JSON file.');
 
         }
-        else if(check.type === "Bad Format")
+        else if(check.type === "Invalid Format")
         {
             alert('It looks like the file is in bad format.');
         }
@@ -74,7 +75,7 @@
                 let docs = fileContents.files;
                 let arr = [];
                 container[fileContents.name] = {
-                  uploadedFile: (function () {
+                  uploadedFile: ( () => {
                         for (let i = 0; i < docs.length; i++) {
                             arr.push(i);
                         }
@@ -82,17 +83,6 @@
                     })()
                     
                 }
-/*let x = JSON.stringify(container);
-console.log(x.toString());*/
-/*let test = Object.entries(container);
-console.log(container.toString());
-Object.keys(container).forEach(function(key) {
-
-    console.log(key, container[key]);
-
-});
-console.log(test);*/
-//for (let [key,value] in container){console.log(key);}
                 for (let i = 0; i < docs.length; i++) {
                     let f = docs[i];
                     // split title into an array
@@ -101,9 +91,8 @@ console.log(test);*/
                     // split the text into an array then index it.
                     let splittedText = f.text.split(" ");
                     this.checkIndex(splittedText, fileContents.name, f, i);
-
-
                 }
+                
         
                 return check;
             }
@@ -121,13 +110,12 @@ console.log(test);*/
 
     this.search = (termsArray ,fName) => {
         let searchResults = {};
-        //fName = new Object();
-        console.log(fName);
         termsArray.forEach(function(i ,j){
             console.log(fName);
-            if (this.fName.indexOf(i)){
+            if (fName.hasOwnProperty(i)){
                 searchResults[termsArray[j]] = fName[i];
             }
+
             else {
                 searchResults[termsArray[j]] = [];
             }
@@ -145,13 +133,16 @@ console.log(test);*/
             termsArray = searchTerm;
         }
         if (!currFile) {
-            for (let i in this.container) {
-                searchResults[i] = this.search(termsArray , this.container[i]);
+            for (let i in container) {
+                searchResults[i] = this.search(termsArray , container[i]);
             }
         }
-        else{
+        else{ 
             try{
-            let file =  this.container[currFile];
+                console.log(currFile)
+                
+                
+            let file =  container[currFile];
             searchResults[file] = this.search(termsArray , file);
         }
         catch(e){
@@ -161,8 +152,8 @@ console.log(test);*/
 
         }
         return searchResults;
-        console.log(searchResults)
 
     }
+ 
     
 });
