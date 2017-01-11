@@ -13,23 +13,23 @@ const testData =  [
 ]
 const obj = new Index();
 
-// Read book data Test suite that read the JSON file containing book data
+
 describe("Read book data", () => {
     
-    // Test spec one that verifies file is not empty
+  
     it("verifies that JSON file passed is not empty",  () => {
         expect(testData.length > 0).toBeTruthy();
     }); 
      
-     // Test spec to ensure a file is actually loaded before indexed
+     
     it("should verify actually a file to be indexed is loaded" ,  () => {
         expect(testData).toBeTruthy();
     });
-    // Test spec to verify the content in file is array
+    
     it("should ensure that the file content is actually a valid JSON Array" ,   () => {
         expect(Array.isArray(testData)).toBeTruthy();
     });
-    // Test spec that ensures file contains only string
+   
     it("should ensure that each object in JSON array contains a property whose value is a string" ,  () => {
     	testData.forEach((element) =>{
     		expect(typeof element.title === "string").toBeTruthy();
@@ -37,7 +37,7 @@ describe("Read book data", () => {
     	});
     });
 
-    // Test spec to check the json file is in good json format
+    
     it("should ensure the json file is in good format" ,  () => {
         let json = eval(testData);
         expect(json).toBeTruthy();
@@ -47,7 +47,7 @@ describe("Read book data", () => {
 // Populate Index test suite
 describe("Populate Index" , () => {
 
-    // Test spec that ensures index is created once JSON file has been read.
+    
     it("should ensure index is created once JSON file has been read",  () => {
 
         // file object 
@@ -55,8 +55,8 @@ describe("Populate Index" , () => {
             name: "testFile",
             files: testData[0]
         };
-        //let obj = new Index();
-         //console.log(getIndex);
+        
+         
         let created = obj.createIndex(jsonfile);
 
         expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
@@ -67,7 +67,7 @@ describe("Populate Index" , () => {
             name: "testFile",
             files: ""
         };
-        //let obj = new Index();
+        
         let created = obj.createIndex(jsonfile);
         expect(created.status).toBeTruthy();
         expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
@@ -76,25 +76,17 @@ describe("Populate Index" , () => {
 });
 
 describe("Check existence" , () => {
-//var obj = new Index();
-    // Test spec to check as to whether createIndex method exist
-   // it("should check createIndex method exists" , function() {
-   //      // console.log(Index)
-        
-   //      var indexy = obj.createIndex();
-   //      expect(indexy).toBeTruthy();
-   //  }); 
 
-    // Test spec to check as to whether searchIndex method exist
+    
     it("should check that searchIndex method exists" , () => {
-        //let obj = new Index();
+        
         let searchy = obj.searchIndex();
         expect(searchy).toBeTruthy();
     });
 
     // Test spec to check as to whether getIndex method exist
     it("should check that getIndex method exists" , () => {
-        //let obj = new Index();
+        
         let gety = obj.getIndex();
         expect(gety).toBeTruthy();
     });
@@ -115,7 +107,7 @@ describe("Search index" , () => {
 
     it("test that verifies that searching the index returns an array of the indices.", () =>{
         // hitz = searchIndex(testData);
-        // expect(hits.length > 0).toContain("Lord")
+        // expect(hitz.length > 0).toContain("Lord")
         //let obj = new Index()
         hitz = obj.searchIndex(testData);
         expect(hitz).toHaveSomething;
