@@ -13,10 +13,10 @@ Elasticsearch uses a structure called an inverted index, which is designed to al
 
 ### How to Use
 --------
-1. Clone this repository to your local machine
-<code>git clone https://github.com/andela-cwekesa/inverted-index-check-point-one.git</code><br>
-2.Navigate to the directory via the terminal.<b>Note:</b>If you downloaded instead of cloning please unzip first the file.<br>
-3.Install all the dependencies by running the command <code>npm install</code><br>
+1. Clone this repository to your local machine: 
+<code>git clone https://github.com/andela-cwekesa/inverted-index-check-point-one.git</code>
+2.Navigate to the directory via the terminal.<b>Note:</b>If you downloaded instead of cloning please unzip first the file.
+3.Install all the dependencies by running the command <code>npm install</code>
 4.Run the application by typing <code>gulp</code>
 
 ### Technologies Used
