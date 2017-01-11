@@ -4,17 +4,16 @@
  *Author : # Collins
 
  */
-'use strict';
-let gulp = require('gulp'),
+const gulp = require('gulp'),
     less = require('gulp-less'),
     livereload = require('gulp-livereload'),
     cleanCSS = require('gulp-clean-css'),
     jshint = require('gulp-jshint');
     //coveralls = require('gulp-coveralls');
 
-let browserSync1 = require("browser-sync").create();
-let browserSync2 = require("browser-sync").create();
-let browserSync = require("browser-sync").create();
+const browserSync1 = require("browser-sync").create();
+const browserSync2 = require("browser-sync").create();
+const browserSync = require("browser-sync").create();
 
 gulp.task("default", ["front","test"]);
 
