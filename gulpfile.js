@@ -1,20 +1,20 @@
+
 /**
  * This file is dependent on gulp which automate tasks.
  *Author : # Collins
 
  */
-
-var gulp = require('gulp'),
+'use strict';
+let gulp = require('gulp'),
     less = require('gulp-less'),
     livereload = require('gulp-livereload'),
     cleanCSS = require('gulp-clean-css'),
-    jshint = require('gulp-jshint'),
-    livereload = require('gulp-livereload');
+    jshint = require('gulp-jshint');
     //coveralls = require('gulp-coveralls');
 
-var browserSync1 = require("browser-sync").create();
-var browserSync2 = require("browser-sync").create();
-var browserSync = require("browser-sync").create();
+let browserSync1 = require("browser-sync").create();
+let browserSync2 = require("browser-sync").create();
+let browserSync = require("browser-sync").create();
 
 gulp.task("default", ["front","test"]);
 
