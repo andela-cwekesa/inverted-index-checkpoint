@@ -26,11 +26,12 @@
             message : fileContents.name + "is not a json file!"
         };
     }
-    else{
+    
+    if (!IsJsonString(fileContents.files)){
         return message = {
-            type: "invalidFormat" ,
-            status: true,
-            message : fileContents.name + "is invalid format file!"
+            type : "invalidFormat" ,
+            status : true,
+            message : fileContents.name + "is not in good format"
         }
     }
 };
