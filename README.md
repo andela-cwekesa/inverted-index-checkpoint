@@ -27,10 +27,9 @@ Elasticsearch uses a structure called an inverted index, which is designed to al
 --------
 1.Javascript (ES6) <br>
 2.AngularJs<br>
-3.Node<br>
-4.HTML<br>
-5.Bootstrap<br>
-6.Jasmine<br>
+3.HTML<br>
+4.Bootstrap<br>
+5.Jasmine<br>
 
 
 ### Licence
