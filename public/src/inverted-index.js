@@ -61,7 +61,6 @@
         else if (check.type === "fileValid") {
                 let indFiles = fileContents.files;
                 let arr = [];
-                console.log(fileContents.name)
                 container[fileContents.name] = {
                   uploadedFile: ( () => {
                         for (let i = 0; i < indFiles.length; i++) {
