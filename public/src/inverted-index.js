@@ -1,6 +1,5 @@
  let Index = (function () {
-    const that = this;
-     let container = {};
+     const container = {};
 
     this.fileCheck=(fileContents) => {
     if (fileContents.files === undefined) {
@@ -18,34 +17,24 @@
             message: fileContents.name + " has been indexed successfully."
         };
     }
-
-    if (fileContents.files === "json") {
-        return message = {
-            type: "json" ,
-            status : true,
-            message : fileContents.name + "is not a json file!"
-        };
-    }
-    
-    if (!IsJsonString(fileContents.files)){
-        return message = {
-            type : "invalidFormat" ,
-            status : true,
-            message : fileContents.name + "is not in good format"
-        }
-    }
-};
-
-
+     let x = stringify(fileContents);
+    if ((JSON.parse(x)) === false) {
+                return message = {
+                    type: "invalidFormat",
+                    status: false,
+                    message: fileContents.name + "Invalid format."
+                }
+            }
+}; 
  // method that sanitizes  input
  this.sanitizeInput = (content)=> {
-    let characters = content.trim().replace(/[^a-z0-9]+/gi, ' ').toLowerCase().split(' ');
+    let characters = content.trim().replace(/,[^a-z0-9]+/gi, ' ').toLowerCase().split(' ');
     return characters;
   };
   // method that check as to whether word has been indexed
     this.checkIndex = (words , file , source , id ) => {
         words.forEach( (word) => {
-            let newWord = that.sanitizeInput(word);
+            let newWord = this.sanitizeInput(word);
             // check if newWord has been indexed before
             if (container[file][newWord] === undefined) {
                 
@@ -64,10 +53,8 @@
         });
     }
 
-
 // method that creates indices
-    this.createIndex = (fileContents)=>{
-        
+    this.createIndex = (fileContents)=> {
         let check = this.fileCheck(fileContents);
         if(check.type === "Empty")
         {
@@ -79,6 +66,7 @@
         {
             alert('It looks like the file is in bad format.');
         }
+        
         else if (check.type === "Valid") {
                 let docs = fileContents.files;
                 let arr = [];
@@ -88,8 +76,7 @@
                             arr.push(i);
                         }
                         return arr;
-                    })()
-                    
+                    })()    
                 }
                 for (let i = 0; i < docs.length; i++) {
                     let f = docs[i];
@@ -98,12 +85,10 @@
                     this.checkIndex(splittedTitle, fileContents.name, f, i);
                     // split the text into an array then index it.
                     let splittedText = f.text.split(" ");
-                    this.checkIndex(splittedText, fileContents.name, f, i);
-                }
-                
-        
+                    this.checkIndex(splittedText, fileContents.name, f, i); 
+                }     
                 return check;
-            }
+        }      
     }
 // method that return index
      this.getIndex = (fName) => {
@@ -114,11 +99,11 @@
         }
     }
   
-// search method
+// search methods
 
     this.search = (termsArray ,fName) => {
-        let searchResults = {};
-        termsArray.forEach(function(i ,j){
+        const searchResults = {};
+        termsArray.forEach((i ,j) =>{
             console.log(fName);
             if (fName.hasOwnProperty(i)){
                 searchResults[termsArray[j]] = fName[i];
@@ -132,7 +117,7 @@
     }
 
     this.searchIndex = (currFile , ...searchTerm) => {
-        let searchResults = {};
+        const searchResults = {};
         let termsArray = [];
         if (typeof(searchTerm) === 'string'){
             termsArray = this.sanitizeInput(searchTerm);
@@ -147,14 +132,13 @@
         }
         else{ 
             try{
-                console.log(currFile)
-                
                 
             let file =  container[currFile];
             searchResults[file] = this.search(termsArray , file);
         }
         catch(e){
-               console.log("Error:",e)
+               
+               return null;
                
             }
 
@@ -162,6 +146,5 @@
         return searchResults;
 
     }
- 
-    
+     
 });
