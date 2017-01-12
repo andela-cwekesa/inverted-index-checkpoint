@@ -147,7 +147,7 @@
                           JSON File :  {{fName}}  | Key :- <i style="color:red" class="fa fa-remove"></i> : Exist ,  <b style="color:red">Blank space</b> : Doesn't Exist <button  class="btn btn-primary" onclick="printPage()"><i class="fa fa-print"></i> Print</button>
                         </div>
                         <div class="panel-body table-responsive" style="overflow-y:auto; height:200px" >
-                    
+                           <b>Table of Index</b>
                             <table  class="table table-bordered table-striped table-hover" id="table_view" >
                                 <thead>
                                 <tr class="info">
@@ -181,15 +181,11 @@
       <!-- <li ng-repeat="disp in disp | filter:search"> 
       {{disp}}
       </li> -->
+
       <li class="alert alert-success" ng-repeat="(key,value) in searchResults">
         {{value}}
       </li>
-      <li ng-repeat="search in searchResults">
-      {{searchResults}}
-        {{search.selectedFile}}
-      }
-      }
-      </li>
+      
       
     </ul>
                     
