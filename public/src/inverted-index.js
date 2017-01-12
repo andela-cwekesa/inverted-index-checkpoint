@@ -1,6 +1,5 @@
  let Index = (function () {
-     const container = {};
-
+    const container = {};
     this.fileCheck=(fileContents) => {
     if (fileContents.files === undefined) {
         return message = {
@@ -9,7 +8,6 @@
             message: fileContents.name + "is empty!"
         };
     }
-    
     if (typeof fileContents === "object") {
         return message = {
             type: "Valid",
@@ -17,7 +15,7 @@
             message: fileContents.name + " has been indexed successfully."
         };
     }
-     let x = stringify(fileContents);
+    let x = stringify(fileContents);
     if ((JSON.parse(x)) === false) {
                 return message = {
                     type: "invalidFormat",
@@ -66,7 +64,6 @@
         {
             alert('It looks like the file is in bad format.');
         }
-        
         else if (check.type === "Valid") {
                 let docs = fileContents.files;
                 let arr = [];
@@ -97,10 +94,8 @@
         } else {
             return container;
         }
-    }
-  
+    }  
 // search methods
-
     this.search = (termsArray ,fName) => {
         const searchResults = {};
         termsArray.forEach((i ,j) =>{
@@ -108,14 +103,12 @@
             if (fName.hasOwnProperty(i)){
                 searchResults[termsArray[j]] = fName[i];
             }
-
             else {
                 searchResults[termsArray[j]] = [];
             }
         });
         return searchResults;
     }
-
     this.searchIndex = (currFile , ...searchTerm) => {
         const searchResults = {};
         let termsArray = [];
@@ -131,20 +124,14 @@
             }
         }
         else{ 
-            try{
-                
+            try{   
             let file =  container[currFile];
             searchResults[file] = this.search(termsArray , file);
         }
-        catch(e){
-               
-               return null;
-               
+        catch(e){  
+               return null;      
             }
-
         }
         return searchResults;
-
-    }
-     
+    }    
 });
