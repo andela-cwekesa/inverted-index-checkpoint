@@ -7,27 +7,28 @@ app.directive("fileChange", ["$window",  ($window) => {
         restrict: "EA",
         require: "ngModel",
         link:  (scope, element, attr, control) => {
-            // FileReader is used to read the contents of a file
-            
-            const reader = new FileReader;
+            // FileReader is used to read the contents of a file 
 
+            const reader = new FileReader;
             // get access to element that triggered an event
             element.bind("change",  (fc) => {
-                // Retrieve the first file from the FileList object
+                
                 let fileContents = fc.target.files[0];
+                
                 if (fileContents.name.indexOf('json') >= 0) {
                     file = fileContents.name;
-                    // reading data in the file
-                    let check = reader.readAsText(fileContents);
+                // reading data in the file
                     
-                } else {
+                let check = reader.readAsText(fileContents);
+   
+                } 
+
+                else {
                     alert("Please , strictly select a JSON file.");
-                }
-                
-                
+                }     
+                    
             });
-            
-            reader.onload = () => {
+                reader.onload = () => {
                 // control change the view value
                 control.$setViewValue({
                     name: file,
@@ -38,6 +39,7 @@ app.directive("fileChange", ["$window",  ($window) => {
                     scope.$eval(attr.fileLoaded);
                 }
             };
+                        
         }
     };
 }]); 
@@ -49,14 +51,19 @@ app.controller('myController' ,  ($scope , $timeout) => {
     let obj = new Index();
     
     $scope.loadFile =  () => {
-        $timeout(function () {
+        $timeout( () => {
             $scope.beforeIndex[$scope.file.name] = angular.copy($scope.file);
         } , 200); // loads file after 200 microseconds
+
     }
 
     $scope.createIndex = (fName) => {
         let fileContents = $scope.beforeIndex[fName];
-        console.log(obj)
+        let x = JSON.stringify(fileContents)
+        console.log(x)
+
+        try{
+        JSON.parse(x)
         let success = obj.createIndex(fileContents);
         
         if (success.status) {
@@ -65,10 +72,10 @@ app.controller('myController' ,  ($scope , $timeout) => {
             let result = obj.getIndex();
             let fileLength = result[fileContents.name].uploadedFile;
 
-            $timeout(function () {
+            $timeout( () => {
                 $scope.container[fileContents.name] = {
                     dataAfterIndexed: result[fileContents.name],
-                    length: (function () {
+                    length: ( () => {
                         let emptyArray = [];
                         $scope.disp = emptyArray;
                         for (let x = 0; x < fileLength.length; x++) {
@@ -81,9 +88,10 @@ app.controller('myController' ,  ($scope , $timeout) => {
         } else {
             alert('The operation was not successful.');
         }
+    }catch(e){alert('Invalid JSON file');}
     }
 
-    $scope.searchIndex = function () {
+    $scope.searchIndex =  () => {
         let fName = $scope.selectedFile;
         let txtSearch = $scope.txtSearch;
         if (!txtSearch) {
