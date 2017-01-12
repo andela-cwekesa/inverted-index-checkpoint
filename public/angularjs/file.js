@@ -33,7 +33,6 @@ app.directive("fileChange", ["$window",  ($window) => {
         }
     };
 }]); 
-
 app.controller('myController' ,  ($scope , $timeout) => {
     $scope.beforeIndex = {}; 
     $scope.container = {};
@@ -89,7 +88,6 @@ app.controller('myController' ,  ($scope , $timeout) => {
                 index:$scope.searchResults[i],
             }
         }
-
     }
 });
 
