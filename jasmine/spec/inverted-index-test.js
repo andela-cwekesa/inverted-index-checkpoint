@@ -10,7 +10,7 @@ const testData =  [
     "title": "The Lord of the Rings: The Fellowship of the Ring.",
     "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
   }
-]
+];
 const obj = new Index();
 
 
@@ -84,7 +84,6 @@ describe("Check existence" , () => {
         expect(searchy).toBeTruthy();
     });
 
-    // Test spec to check as to whether getIndex method exist
     it("should check that getIndex method exists" , () => {
         
         let gety = obj.getIndex();
@@ -106,9 +105,7 @@ describe("Search index" , () => {
     });
 
     it("test that verifies that searching the index returns an array of the indices.", () =>{
-        // hitz = searchIndex(testData);
-        // expect(hitz.length > 0).toContain("Lord")
-        //let obj = new Index()
+        
         hitz = obj.searchIndex(testData);
         expect(hitz).toHaveSomething;
     });
