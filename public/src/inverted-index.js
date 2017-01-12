@@ -15,7 +15,7 @@
             message: fileContents.name + " has been indexed successfully."
         };
     }
-    let x = stringify(fi                                                                                                                                                                                                                  leContents);
+    let x = stringify(fileContents);                                                                                                                                                                                                           
     if ((JSON.parse(x)) === false) {
                 return message = {
                     type: "invalidFormat",
