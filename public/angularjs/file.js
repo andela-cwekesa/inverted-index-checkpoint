@@ -26,8 +26,9 @@ app.directive("fileChange", ["$window",  ($window) => {
                     name: file,
                     files: scope.$eval(reader.result)
                 });
-                if (attr.fileLoaded) {
-                    scope.$eval(attr.fileLoaded);
+                if (attr.selectedFile) {
+                    console.log(attr.selectedFile)
+                    scope.$eval(attr.selectedFile);
                 }
             };                    
         }
