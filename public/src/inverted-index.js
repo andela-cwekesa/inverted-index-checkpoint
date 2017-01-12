@@ -15,7 +15,7 @@
             message: fileContents.name + " has been indexed successfully."
         };
     }
-    let x = stringify(fileContents);
+    let x = stringify(fi                                                                                                                                                                                                                  leContents);
     if ((JSON.parse(x)) === false) {
                 return message = {
                     type: "invalidFormat",
@@ -94,7 +94,6 @@
     this.searchFeedback = (termsArray ,fName) => {
         const searchResults = {};
         termsArray.forEach((i ,j) =>{
-            console.log(fName);
             if (fName.hasOwnProperty(i)){
                 searchResults[termsArray[j]] = fName[i];
             }
