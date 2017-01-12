@@ -21,13 +21,12 @@ app.directive("fileChange", ["$window",  ($window) => {
                 }              
             });
                 reader.onload = () => {
-                // control change the view value
+                // control change /update the view value
                 control.$setViewValue({
                     name: file,
                     files: scope.$eval(reader.result)
                 });
                 if (attr.selectedFile) {
-                    console.log(attr.selectedFile)
                     scope.$eval(attr.selectedFile);
                 }
             };                    
@@ -49,7 +48,7 @@ app.controller('myController' ,  ($scope , $timeout) => {
         try{
         JSON.parse(x)
         let success = obj.createIndex(fileContents);   
-        if (success.status) {
+        if (success) {
             alert ('The operation was successful.');    
             let result = obj.getIndex();
             let fileLength = result[fileContents.name].uploadedFile;
