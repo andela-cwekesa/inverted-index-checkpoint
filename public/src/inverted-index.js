@@ -3,14 +3,14 @@
     this.fileCheck=(fileContents) => {
     if (fileContents.files === undefined) {
         return message = {
-            type: "Empty",
+            type: "fileEmpty",
             status: false,
             message: fileContents.name + "is empty!"
         };
     }
     if (typeof fileContents === "object") {
         return message = {
-            type: "Valid",
+            type: "fileValid",
             status: true,
             message: fileContents.name + " has been indexed successfully."
         };
@@ -50,7 +50,7 @@
 // method that creates indices
     this.createIndex = (fileContents)=> {
         let check = this.fileCheck(fileContents);
-        if(check.type === "Empty")
+        if(check.type === "fileEmpty")
         {  
           alert('It looks like you uploaded an empty JSON file.');
         }
@@ -58,19 +58,20 @@
         {
          alert('It looks like the file is in bad format.');
         }
-        else if (check.type === "Valid") {
-                let docs = fileContents.files;
+        else if (check.type === "fileValid") {
+                let indFiles = fileContents.files;
                 let arr = [];
+                console.log(fileContents.name)
                 container[fileContents.name] = {
                   uploadedFile: ( () => {
-                        for (let i = 0; i < docs.length; i++) {
+                        for (let i = 0; i < indFiles.length; i++) {
                             arr.push(i);
                         }
                         return arr;
                     })()    
                 }
-                for (let i = 0; i < docs.length; i++) {
-                    let f = docs[i];
+                for (let i = 0; i < indFiles.length; i++) {
+                    let f = indFiles[i];
                     // split title into an array
                     let splittedTitle = f.title.split(" ");
                     this.checkIndex(splittedTitle, fileContents.name, f, i);
@@ -90,15 +91,15 @@
         }
     }  
 // search methods
-    this.search = (termsArray ,fName) => {
+    this.searchFeedback = (termsArray ,fName) => {
         const searchResults = {};
         termsArray.forEach((i ,j) =>{
             console.log(fName);
             if (fName.hasOwnProperty(i)){
                 searchResults[termsArray[j]] = fName[i];
             }
-            else {
-                searchResults[termsArray[j]] = [];
+            else {    
+             alert('Sorry , but nothing matched your search.');
             }
         });
         return searchResults;
@@ -114,13 +115,13 @@
         }
         if (!currFile) {
             for (let i in container) {
-                searchResults[i] = this.search(termsArray , container[i]);
+                searchResults[i] = this.searchFeedback(termsArray , container[i]);
             }
         }
         else{ 
             try{   
             let file =  container[currFile];
-            searchResults[file] = this.search(termsArray , file);
+            searchResults[file] = this.searchFeedback(termsArray , file);
         }
         catch(e){  
                return null;      
