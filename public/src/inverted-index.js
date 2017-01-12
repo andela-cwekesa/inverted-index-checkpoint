@@ -28,7 +28,7 @@
 }; 
  // method that sanitizes  input
  this.sanitizeInput = (content)=> {
-    let characters = content.trim().replace(/,[^a-z0-9]+/gi, ' ').toLowerCase().split(' ');
+    let characters = content.trim().replace(/[.[,\]/#!$%\^&\*;:@{}=\-_`~()]/g, '').toLowerCase().split(' ');
     return characters;
   };
   // method that check as to whether word has been indexed
