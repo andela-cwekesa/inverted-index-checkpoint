@@ -1,16 +1,15 @@
 ### UI 
 The alert-info is unnecessary big. =====> done
-Properly left-align
-Use normal texts  ===========> done
-All elements in the div should be equidistant i.e padding inside the div
+Properly left-align ==========> done
+Use normal texts  ===========> done <br>
+All elements in the div should be equidistant i.e padding inside the div ===========>
 
 ### Footer 
-- fixed at the bottom ===========> done
+- fixed at the bottom ===========> done 
 - dummy text for table will load here 
 
 ### Logic 
-- project is not robust enough to handle malformed json input
-- it doesn't  also test to confirm json is in correct json format
+- project is not robust enough to handle malformed json input ========>
 - Search not working ================> done
 
 ### Tests
