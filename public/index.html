@@ -144,7 +144,7 @@
                        <!-- iterates through the container object holding the files that have been indexed -->
                        <div class="panel panel-success" ng-repeat="(fName, files) in container">
                         <div class="panel-heading">
-                          JSON File :  {{fName}}  | Key :- <i style="color:red" class="fa fa-remove"></i> : Exist ,  <b style="color:red">Blank space</b> : Doesn't Exist <button  class="btn btn-primary" onclick="printPage()"><i class="fa fa-print"></i> Print</button>
+                          Key :- <i style="color:red" class="fa fa-remove"></i> : Exist ,  <b style="color:red">Blank space</b> : Doesn't Exist <button  class="btn btn-primary" onclick="printPage()"><i class="fa fa-print"></i> Print</button>
                         </div>
                         <div class="panel-body table-responsive" style="overflow-y:auto; height:200px" >
                            <b>Table of Index</b>
@@ -163,7 +163,7 @@
                                       <td>{{ word }}</td>
                                       <td ng-repeat="id in files.length">
                                         <span ng-if="fileFound[id]">
-                                          <i class="fa fa-remove"></i>
+                                          <i class="fa fa-remove" style="color: red"></i>
                                         </span>
                                         <span ng-if="fileFound[id] === undefined">
                                             
@@ -182,11 +182,9 @@
       {{disp}}
       </li> -->
 
-      <li class="alert alert-success" ng-repeat="(key,value) in searchResults">
-        {{value}}
-      </li>
-      
-      
+      <div class="alert alert-success" ng-repeat="(key,value) in searchResults">
+        <i class="fa fa-check" ></i> {{value}}
+
     </ul>
                     
                       <!-- search end here -->
@@ -226,7 +224,7 @@
                     </div>
                     <div class="modal-body">
                         <label class="btn btn-success" for="file"> <i class="fa fa-file"></i> Select File</label>
-                        <input type="file" class="hidden" id="file" file-Change="json" file-loaded="loadFile()" ng-model="file"/>
+                        <input type="file" class="hidden" id="file" file-Change="json" selected-file="loadFile()" ng-model="file"/>
                         <br><br>
                         <div class="row">
                             <div class="col-md-6" ng-repeat="(fName, files) in beforeIndex">
