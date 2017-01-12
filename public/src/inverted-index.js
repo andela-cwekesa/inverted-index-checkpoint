@@ -34,10 +34,8 @@
         words.forEach( (word) => {
             let newWord = this.sanitizeInput(word);
             // check if newWord has been indexed before
-            if (container[file][newWord] === undefined) {
-                
-                container[file][newWord] = {};
-               
+            if (container[file][newWord] === undefined) {    
+                container[file][newWord] = {};   
                 container[file][newWord][id] = {
                     source: source,
                     file:file
@@ -47,22 +45,18 @@
                 source: source,
                 file: file
             };
-
         });
     }
-
 // method that creates indices
     this.createIndex = (fileContents)=> {
         let check = this.fileCheck(fileContents);
         if(check.type === "Empty")
-        {
-            
-            alert('It looks like you uploaded an empty JSON file.');
-
+        {  
+          alert('It looks like you uploaded an empty JSON file.');
         }
         else if(check.type === "invalidFormat")
         {
-            alert('It looks like the file is in bad format.');
+         alert('It looks like the file is in bad format.');
         }
         else if (check.type === "Valid") {
                 let docs = fileContents.files;
