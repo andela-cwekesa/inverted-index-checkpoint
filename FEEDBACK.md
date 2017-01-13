@@ -4,14 +4,14 @@
 - The alert-info is unnecessary big. =====> done
 - Properly left-align ==========> done
 - Use normal texts  ===========> done 
-- All elements in the div should be equidistant i.e padding inside the div ===========>
+- All elements in the div should be equidistant i.e padding inside the div ===========> done
 
 ### Footer 
 - fixed at the bottom ===========> done 
-- dummy text for table will load here 
+- dummy text for table will load here  ==> done
 
 ### Logic 
-- project is not robust enough to handle malformed json input ========> partially done.JSON.parse not working correctly
+- project is not robust enough to handle malformed json input ========> done
 - Search not working ================> done
 
 ### Tests
@@ -32,3 +32,14 @@
 - Use of this and that - arrow functions to the rescue. ==========> done
 - Read on Object.prototype.toString.call. ==========> done
 - Remove console logs in code ================> done
+
+## Facilitator
+13/01/16
+- Add name of file in the indexed table
+- search results to be user friendly
+- display the search results in something like a modal to be easily seen by the user
+- fix coverage issue
+- Edit gulpfile.js - proper code formatting
+- lines 51, 52,55,57,72 on gulpfile.js - commented code
+line 40 changed to arrow function es6 std
+- eslint integrate to my project
