@@ -136,11 +136,11 @@
                    <div class="pull-right">
                                 <a href="#" data-toggle="modal" data-target="#video" style="color:white"><i class="fa fa-youtube-play fa-2x"></i></a>
                             </div>
-                       <h3 class="panel-title"><marquee scrollamount="5" width="40">&lt;&lt;&lt;</marquee>Welcome To Inverted Index <marquee scrollamount="5" direction="right" width="40">&gt;&gt;&gt;</marquee></h3>
+                       <h3 class="panel-title">Welcome To Inverted Index</h3>
                    </div>
                    <div class="panel-body">
+                     <blockquote><i class="fa fa-info-circle"></i> Indexed Table Loads Here</blockquote>
                        <!-- after indexed start here -->
-
                        <!-- iterates through the container object holding the files that have been indexed -->
                        <div class="panel panel-success" ng-repeat="(fName, files) in container">
                         <div class="panel-heading">
@@ -176,22 +176,14 @@
                     </div>
                        <!-- after indexed end here -->
 
-                      <!-- search start here -->
-                       <ul>
-      <!-- <li ng-repeat="disp in disp | filter:search"> 
-      {{disp}}
-      </li> -->
-
+                      <!-- search results start here -->
       <div class="alert alert-success" ng-repeat="(key,value) in searchResults">
         <i class="fa fa-check" ></i> {{value}}
-
-    </ul>
-                    
-                      <!-- search end here -->
-              </div>
-               </div>
-               <div class="alert alert-info" style="margin-top: 230px"> <b style="margin-left: 200px;">&copy; 2017  | Inverted Index | Check point One | Collins</b>
-               </div>
+      </div>
+      <!-- search results end here  -->
+    </div>
+   <div class="alert alert-info" style="margin-top: 210px"> <b style="margin-left: 200px;">&copy; 2017  | Inverted Index | Check point One | Collins</b>
+   </div>
                
            </div>
     
