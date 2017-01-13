@@ -10,12 +10,15 @@ app.directive("fileChange", ["$window",  ($window) => {
             const reader = new FileReader;
             // get access to element that triggered an event
             element.bind("change",  (fc) => {    
-                let fileContents = fc.target.files[0];    
+                let fileContents = fc.target.files[0];  // Retrieves the first File from the FileList object (w3c file api)
                 if (fileContents.name.indexOf('json') >= 0) {
                     file = fileContents.name;
                 // reading data in the file    
                 let check = reader.readAsText(fileContents);
                 } 
+                else if (!fileContents){
+                    alert ("Unable to load the file.Please retry");
+                }
                 else {
                     alert("Please , strictly select a JSON file.");
                 }              
@@ -57,7 +60,6 @@ app.controller('myController' ,  ($scope , $timeout) => {
                     dataAfterIndexed: result[fileContents.name],
                     length: ( () => {
                         let emptyArray = [];
-                        $scope.disp = emptyArray;
                         for (let x = 0; x < fileLength.length; x++) {
                             emptyArray.push(x);
                         }
