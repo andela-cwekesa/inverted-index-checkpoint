@@ -3,7 +3,7 @@
 <br>
 # inverted-index
 --------
-Elasticsearch uses a structure called an inverted index, which is designed to allow very fast full-text searches. An inverted index consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears. <br>
+Elastic search uses a structure called an inverted index, which is designed to allow very fast full-text searches. An inverted index consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears. <br>
 <!--<img width="1263" alt="shot" src="https://cloud.githubusercontent.com/assets/24464034/21901046/3e1a6b0a-d907-11e6-8966-37dbcbbbee15.png">
 <br>-->
 
