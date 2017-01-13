@@ -1,4 +1,4 @@
- let Index = (function () {
+let Index = (function () {
     const container = {};
     this.fileCheck=(fileContents) => {
     if (fileContents.files === undefined) {
@@ -23,12 +23,12 @@
                     message: fileContents.name + "Invalid format."
                 }
             }
-}; 
- // method that sanitizes  input
- this.sanitizeInput = (content)=> {
+    }; 
+     // method that sanitizes  input
+    this.sanitizeInput = (content)=> {
     let characters = content.trim().replace(/[.[,\]/#!$%\^&\*;:@{}=\-_`~()]/g, '').toLowerCase().split(' ');
     return characters;
-  };
+    };
   // method that check as to whether word has been indexed
     this.checkIndex = (words , file , source , id ) => {
         words.forEach( (word) => {
@@ -46,7 +46,7 @@
             };
         });
     }
-// method that creates indices
+    // method that creates indices
     this.createIndex = (fileContents)=> {
         let check = this.fileCheck(fileContents);
         if(check.type === "fileEmpty")
@@ -88,7 +88,7 @@
             return container;
         }
     }  
-// search methods
+    // search methods
     this.searchFeedback = (termsArray ,fName) => {
         const searchResults = {};
         termsArray.forEach((i ,j) =>{
