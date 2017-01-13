@@ -70,10 +70,8 @@ let Index = (function () {
                 }
                 for (let i = 0; i < indFiles.length; i++) {
                     let f = indFiles[i];
-                    // split title into an array
                     let splittedTitle = f.title.split(" ");
                     this.checkIndex(splittedTitle, fileContents.name, f, i);
-                    // split the text into an array then index it.
                     let splittedText = f.text.split(" ");
                     this.checkIndex(splittedText, fileContents.name, f, i); 
                 }     
