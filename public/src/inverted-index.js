@@ -33,7 +33,6 @@
     this.checkIndex = (words , file , source , id ) => {
         words.forEach( (word) => {
             let newWord = this.sanitizeInput(word);
-            // check if newWord has been indexed before
             if (container[file][newWord] === undefined) {    
                 container[file][newWord] = {};   
                 container[file][newWord][id] = {
