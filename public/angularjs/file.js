@@ -17,10 +17,10 @@ app.directive("fileChange", ["$window",  ($window) => {
                 let check = reader.readAsText(fileContents);
                 } 
                 else if (!fileContents){
-                    alert ("Unable to load the file.Please retry");
+                    $window.alert ("Unable to load the file.Please retry");
                 }
                 else {
-                    alert("Please , strictly select a JSON file.");
+                    $window.alert("Please , strictly select a JSON file.");
                 }              
             });
                 reader.onload = () => {
@@ -39,7 +39,7 @@ app.directive("fileChange", ["$window",  ($window) => {
 app.controller('myController' ,  ($scope , $timeout) => {
     $scope.beforeIndex = {}; 
     $scope.container = {};
-    let obj = new Index();   
+    const obj = new Index();   
     $scope.loadFile =  () => {
         $timeout( () => {
             $scope.beforeIndex[$scope.file.name] = angular.copy($scope.file);
