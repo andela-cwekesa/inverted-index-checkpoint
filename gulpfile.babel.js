@@ -2,7 +2,6 @@
  * This file is dependent on gulp which automate tasks.
  *Author : # Collins
  */
-//import gulp from 'gulp';
 const gulp = require('gulp'),
     less = require('gulp-less'),
     livereload = require('gulp-livereload'),
