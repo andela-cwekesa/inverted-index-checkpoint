@@ -35,7 +35,7 @@
 
 ## Facilitator
 13/01/16
-- Add name of file in the indexed table
+- Add name of file in the indexed table ===> done
 - search results to be user friendly
 - display the search results in something like a modal to be easily seen by the user
 - fix coverage issue
