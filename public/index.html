@@ -80,8 +80,7 @@
                       </div> -->
                         <select class="form-control" ng-model="selectedFile" required>
                                  <option  value="">All Files</option>
-                                 <!--<option  ng-value="searchAll">Search All Files</option>-->
-                                 <option ng-repeat="(key, value) in beforeIndex" value="{{key}}">{{ key  }} </option>
+                                 <option ng-repeat="(key, value) in container" value="{{key}}">{{ key  }} </option>
                         </select>
                                <br>
                             <div class="input-group custom-search-form">
@@ -147,7 +146,7 @@
                           Key :- <i style="color:red" class="fa fa-remove"></i> : Exist ,  <b style="color:red">Blank space</b> : Doesn't Exist <button  class="btn btn-primary" onclick="printPage()"><i class="fa fa-print"></i> Print</button>
                         </div>
                         <div class="panel-body table-responsive" style="overflow-y:auto; height:200px" >
-                           <b>Table of Index</b>
+                           <b>Table of Indices of : {{fName}} </b>
                             <table  class="table table-bordered table-striped table-hover" id="table_view" >
                                 <thead>
                                 <tr class="info">
