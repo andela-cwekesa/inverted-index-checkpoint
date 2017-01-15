@@ -23,6 +23,12 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
     ],
+plugins:[
+             'karma-jasmine',
+             'karma-coverage',
+             'karma-phantomjs-launcher',
+             'karma-phantomjs'
+             ],
 
 
     // preprocess matching files before serving them to the browser
