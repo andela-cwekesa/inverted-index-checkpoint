@@ -47,6 +47,7 @@
     "gulp-jshint": "^2.0.4",
     "gulp-less": "^3.3.0",
     "gulp-livereload": "^3.8.1",
-    "jasmine-core": "^2.5.2"
+    "jasmine-core": "^2.5.2",
+    "phantomjs2": "^2.2.0"
   }
 }
