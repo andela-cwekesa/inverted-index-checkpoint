@@ -27,7 +27,6 @@ plugins:[
              'karma-jasmine',
              'karma-coverage',
              'karma-phantomjs2-launcher',
-             'karma-phantomjs2'
              ],
 
 
