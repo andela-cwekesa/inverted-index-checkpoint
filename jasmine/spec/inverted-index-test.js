@@ -29,8 +29,8 @@ describe("Read book data", () => {
     	});
     }); 
     it("should ensure the json file is in good format" ,  () => {
-        let json = eval(testData);
-        expect(json).toBeTruthy();
+        let goodFormat = eval(testData);
+        expect(goodFormat).toBeTruthy();
     });
 });
 // Populate Index test suite
