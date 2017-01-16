@@ -15,8 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'jasmine/spec/*.js',
-      'public/src/*.js',
+      'jasmine/spec/inverted-index-test.js',
+      'public/src/inverted-index.js',
     ],
 
 
@@ -33,8 +33,8 @@ plugins:[
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'public/src/inverted-index.js': 'coverage'
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
