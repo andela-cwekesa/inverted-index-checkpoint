@@ -29,7 +29,7 @@ describe("Read book data", () => {
     	});
     }); 
     it("should ensure the json file is in good format" ,  () => {
-        let goodFormat = eval(testData);
+        let goodFormat = eval(testData)
         expect(goodFormat).toBeTruthy();
     });
 });
