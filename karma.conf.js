@@ -26,9 +26,14 @@ module.exports = function(config) {
 plugins:[
              'karma-jasmine',
              'karma-coverage',
-             'karma-firefox-launcher',
+             'karma-chrome-launcher',
              ],
-
+customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -61,7 +66,7 @@ plugins:[
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox'],
+    browsers: ['Chrome'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
