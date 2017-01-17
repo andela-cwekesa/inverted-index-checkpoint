@@ -4,8 +4,7 @@
   "description": "Inverted index checkpoint one ",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp default",
-    
+    "start": "gulp default"
   },
   "repository": {
     "type": "git",
