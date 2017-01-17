@@ -36,10 +36,10 @@
 ## Facilitator
 13/01/16
 - Add name of file in the indexed table ===> done
-- search results to be user friendly
-- display the search results in something like a modal to be easily seen by the user
-- fix coverage issue
+- search results to be user friendly ==========> done
+- display the search results in something like a modal to be easily seen by the user  ==============>done
+- fix coverage issue ===========> In progress
 - Edit gulpfile.js - proper code formatting  ============> done
 - lines 51, 52,55,57,72 on gulpfile.js - commented code  ================> done
 - line 40 changed to arrow function es6 std ==================> done
-- eslint integrate to my project
+- eslint integrate to my project ===================> done
