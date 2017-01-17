@@ -8,5 +8,5 @@ before_install:
  - sh -e /etc/init.d/xvfb start
 
 after_script:
-  cat ./coverage/**/*.info | ./node_modules/coveralls/bin/coveralls.js
+  cat ./coverage/**/*.info | ./node_modules/coveralls/bin/coveralls
 
