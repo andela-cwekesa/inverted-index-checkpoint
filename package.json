@@ -5,8 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp default",
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/gulp-cli/bin/gulp test",
-    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "karma start karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",
