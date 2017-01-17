@@ -86,7 +86,7 @@
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control"  placeholder=" Search word(s) here" ng-model="txtSearch" ng-maxlength="20" name="taf">
                                 <span class="input-group-btn">
-                                <button class="btn btn-primary"  ng-click="searchIndex()">
+                                <button class="btn btn-primary"  ng-click="searchIndex()" data-toggle="modal" data-target="#results">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -176,9 +176,72 @@
                        <!-- after indexed end here -->
 
                       <!-- search results start here -->
-      <div class="alert alert-success" ng-repeat="(key,value) in searchResults">
+     <!--  <div class="alert alert-success" ng-repeat="(key,value) in searchResults">
         <i class="fa fa-check" ></i> {{value}}
-      </div>
+      </div> -->
+       <!--<div class="alert alert-success" ng-repeat="(key,value) in searchResults">
+       <div ng-repeat="(x ,y) in value" >{{y}} </div>
+        <i class="fa fa-check" ></i>
+      </div>-->
+      <!-- start of search result -->
+        <div class="modal fade" id="results" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3><i class="fa fa-search"></i> Search Results </h3>
+                    </div>
+                    <div class="modal-body">
+                        <!--<table class="table table-bordered table-striped">
+              <tbody ng-repeat="(key, value) in searchResults">
+                        <tr>
+                            
+                            <th>
+                                {{key}}
+                            </th>
+                            </tr>
+                        <tr ng-repeat="(term, index) in value" >
+                            <td>
+                                {{term}}
+                            </td>
+                        
+                            <td>
+                                {{index}}
+                            </td>
+
+                      </tr>
+          </tbody>
+
+      </table>-->
+<div  ng-repeat="file in searchResults">
+
+      <table class="table table-bordered table-striped"  ng-repeat="(key, value) in file">
+                  <thead>
+                    <th class="success" > Item/Term Searched:  {{key}}</th>
+                    <tr class="info">
+                      <th> Document(s) Found</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="(key,value) in value">
+                      <td> Doc_{{key}} <i class="fa fa-check"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+<!-- end of search  result -->
+      
+      
+
       <!-- search results end here  -->
     </div>
    <div class="alert alert-info" style="margin-top: 210px"> <b style="margin-left: 200px;">&copy; 2017  | Inverted Index | Check point One | Collins</b>
@@ -223,7 +286,7 @@
                                     <div class="panel-heading">
                                         <div class="row">
                                           <div class="col-md-8">
-                                              <h5 class=""> File to be Indexed: {{ fName }} </h5>
+                                              <h5 class=""> File to be Indexed: <i class="fa fa-file"></i> {{ fName }} </h5>
                                           </div>
                                         <br><br>
                                           <div class="col-md-6">
