@@ -32,15 +32,15 @@ let Index = (function () {
   // method that check as to whether word has been indexed
     this.checkIndex = (words , file , source , id ) => {
         words.forEach( (word) => {
-            let newWord = this.sanitizeInput(word);
-            if (container[file][newWord] === undefined) {    
-                container[file][newWord] = {};   
-                container[file][newWord][id] = {
+            let the = this.sanitizeInput(word);
+            if (container[file][the] === undefined) {    
+                container[file][the] = {};   
+                container[file][the][id] = {
                     source: source,
                     file:file
                 };
             } 
-            container[file][newWord][id] = {
+            container[file][the][id] = {
                 source: source,
                 file: file
             };
