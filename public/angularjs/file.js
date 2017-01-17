@@ -91,5 +91,6 @@ app.controller('myController' ,  ($scope , $timeout) => {
             }
         }
     }
+
 });
 
