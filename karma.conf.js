@@ -78,4 +78,7 @@ customLaunchers: {
     // how many browser should be started simultaneous
     concurrency: Infinity
   })
+  if(process.env.TRAVIS) {  
+  config.browsers = ['Chrome_travis_ci'];
+  }
 }
