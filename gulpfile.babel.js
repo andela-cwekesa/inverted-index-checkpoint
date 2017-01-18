@@ -6,11 +6,12 @@ const gulp = require("gulp"),
     less = require("gulp-less"),
     livereload = require("gulp-livereload"),
     cleanCSS = require("gulp-clean-css"),
+    jasmine = require("gulp-jasmine"),
     jshint = require("gulp-jshint");
 const browserSync1 = require("browser-sync").create();
 const browserSync2 = require("browser-sync").create();
 const browserSync = require("browser-sync").create();
-gulp.task("default", ["front","test"]);
+gulp.task("default", ["front","test1"]);
 gulp.task("css", () => {
   gulp.src("public/design/css/*.css")
     .pipe(cleanCSS())
@@ -39,7 +40,7 @@ gulp.task("front",  () => {
     // Tracks html,js and css changes.I have used to allow reload
     gulp.watch("./public/**/*.{html,js,css}").on("change", browserSync1.reload);
 });
-gulp.task("test",  () => {
+gulp.task("test1",  () => {
     browserSync2.init({
         server: {
             baseDir: ["./public/src/", "./jasmine"]},
@@ -51,3 +52,8 @@ gulp.task("test",  () => {
     gulp.watch("./jasmine/spec/*.js").on("change",browserSync2.reload);
     gulp.watch("./public/src/*.js").on("change", browserSync2.reload);
 }); 
+
+gulp.task("test" , () => {
+    gulp.src("./jasmine/spec/inverted-index-test.js")
+    .pipe(jasmine());
+});
