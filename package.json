@@ -33,6 +33,7 @@
     "eslint": "^3.13.1",
     "gulp-jshint": "^2.0.4",
     "istanbul": "^0.4.5",
+    "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "jshint": "^2.9.4",
     "karma": "^1.4.0",
