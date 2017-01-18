@@ -65,11 +65,9 @@ gulp.task("test" ,["pre-test"], () => {
 });
 
 gulp.task("pre-test",  () => {
-  return gulp.src(["public/src/**/*.js"])
+  return gulp.src(["./public/src/inverted-index.js"])
     // Covering files
     .pipe(istanbul())
-    // Write the covered files to a temporary directory
-    .pipe(gulp.dest("test-tmp/"))
     // Force `require` to return covered files
     .pipe(istanbul.hookRequire());
 });
