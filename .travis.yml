@@ -1,9 +1,8 @@
 language: node_js
 node_js:
-  - "7.2.1"
+  - "6"
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-after_success:
-- npm run coverage
+after_success: 'npm run coverage'
 
 
