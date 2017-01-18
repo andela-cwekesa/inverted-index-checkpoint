@@ -43,3 +43,12 @@
 - lines 51, 52,55,57,72 on gulpfile.js - commented code  ================> done
 - line 40 changed to arrow function es6 std ==================> done
 - eslint integrate to my project ===================> done
+
+
+## 
+
+- space line 3
+- class line one.
+- function to be removed 
+- line of space between logical method --> lines 2 and 3. 
+- lines 4 
