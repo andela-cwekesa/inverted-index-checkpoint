@@ -1,4 +1,4 @@
-class Index{
+module.exports = class Index{
     constructor(){
         this.container = {};
     }
