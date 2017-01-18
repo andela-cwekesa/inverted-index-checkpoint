@@ -22,6 +22,7 @@ gulp.task("watch", () => {
   livereload.listen();
   gulp.watch("public/design/css/*.css", ["css"]);
 });
+
 // A task that ensures the javascript task is complete before reloading browsers
 gulp.task("js-watch", ["js"],  (done) => {
   browserSync.reload();
