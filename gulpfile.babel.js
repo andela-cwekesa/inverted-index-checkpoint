@@ -4,6 +4,7 @@
  */
 const gulp = require("gulp"),
   less = require("gulp-less"),
+  cover = require("gulp-coverage"),
   istanbul = require("gulp-istanbul"),
   livereload = require("gulp-livereload"),
   cleanCSS = require("gulp-clean-css"),
@@ -58,6 +59,8 @@ gulp.task("test1",  () => {
 gulp.task("test" ,["pre-test"], () => {
   gulp.src("./jasmine/spec/inverted-index-test.js")
     .pipe(jasmine())
+    .pipe(cover.gather())
+    .pipe(cover.format())
     .pipe(istanbul.writeReports())
     .pipe(istanbul.enforceThresholds({
       thresholds: { global: 90 }
