@@ -1,7 +1,15 @@
+/** @class representing an Index. */
 module.exports = class Index {
+  /**
+     * Creates Index constructor.
+     */
   constructor(){
     this.container = {};
   }
+  /**
+   * @method checks file
+   * @param {string} fileContents
+   */
   fileCheck(fileContents) {
     if (fileContents.files === undefined) {
       return this.message = {
@@ -26,12 +34,27 @@ module.exports = class Index {
       };
     }
   } 
-     // method that sanitizes  input
+  
+/**
+ * sanitizes input
+ * 
+ * @method sanitizeInput
+ * @param {string} content
+ * @return {string} return characters
+ */
   sanitizeInput (content) {
     let characters = content.trim().replace(/[.[,\]/#!$%\^&\*;:@{}=\-_`~()]/g, '').toLowerCase().split(' ');
     return characters;
   }
-  // method that check as to whether word has been indexed
+  /**
+   * method that creates object of indices and check 
+   * if word has been indexed before
+   * @param {array} words
+   * @param {string} file
+   * @param {object} source
+   * @param {number} id
+   */
+  
   checkIndex (words , file , source , id ) {
     words.forEach( (word) => {
       let the = this.sanitizeInput(word);
@@ -48,7 +71,11 @@ module.exports = class Index {
       };
     });
   }
-    // method that creates indices
+    /**
+     * method that creates indices
+     * @param{json} fileContents
+     */
+
   createIndex(fileContents) {
     let check = this.fileCheck(fileContents);
     if(check.type === "fileEmpty") {  
@@ -69,16 +96,21 @@ module.exports = class Index {
         })()
       };
       for (let i = 0; i < indFiles.length; i++) {
-        let f = indFiles[i];
-        let splittedTitle = f.title.split(" ");
-        this.checkIndex(splittedTitle, fileContents.name, f, i);
-        let splittedText = f.text.split(" ");
-        this.checkIndex(splittedText, fileContents.name, f, i); 
+        let doc = indFiles[i];
+        let splittedTitle = doc.title.split(" ");
+        this.checkIndex(splittedTitle, fileContents.name, doc, i);
+        let splittedText = doc.text.split(" ");
+        this.checkIndex(splittedText, fileContents.name, doc, i); 
       }     
       return check;
     }      
   }
-// method that return index
+
+/**
+ * method return index of files in container object
+ * 
+ * @param{string} name
+ */
   getIndex (name) {
     if (name && typeof name === "string") {
       return this.container[name];
@@ -86,7 +118,15 @@ module.exports = class Index {
       return this.container;
     }
   }  
-    // search methods
+
+    /**
+     * takes terms of array and fetch result of each token.
+     * 
+     * @param{array} termsArray
+     * @param{object} name
+     * @param{object} searchResults 
+     * 
+     */
   searchFeedback (termsArray ,name) {
     const searchResults = {};
     termsArray.forEach((i ,j) =>{
@@ -99,6 +139,11 @@ module.exports = class Index {
     });
     return searchResults;
   }
+
+  /**
+   * looks for search term in file return indices
+   * 
+   */
   searchIndex (currFile ,...searchTerm) {
     const searchResults = {};
     let termsArray = [];
