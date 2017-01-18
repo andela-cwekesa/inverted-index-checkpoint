@@ -1,5 +1,6 @@
 // Test data that will used in testing.It is like a JSON mock file
 // Most of validations references are done on this file
+let Index = require('../../public/src/inverted-index.js'),
 const testData =  [
   {
     "title": "Alice in Wonderland",
