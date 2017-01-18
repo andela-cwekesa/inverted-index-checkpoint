@@ -1,4 +1,3 @@
-
 let app = angular.module("myApp", []);
 app.directive("fileChange", ["$window",  ($window) => {
     return {
@@ -11,7 +10,7 @@ app.directive("fileChange", ["$window",  ($window) => {
             // get access to element that triggered an event
             element.bind("change",  (fc) => {    
                 let fileContents = fc.target.files[0];  // Retrieves the first File from the FileList object (w3c file api)
-                if (fileContents.name.indexOf('json') >= 0) {
+                if (fileContents.name.indexOf("json") >= 0) {
                     file = fileContents.name;
                 // reading data in the file    
                 let check = reader.readAsText(fileContents);
@@ -23,7 +22,7 @@ app.directive("fileChange", ["$window",  ($window) => {
                     $window.alert("Please , strictly select a JSON file.");
                 }              
             });
-                reader.onload = () => {
+            reader.onload = () => {
                 // control change /update the view value
                 control.$setViewValue({
                     name: file,
@@ -36,7 +35,7 @@ app.directive("fileChange", ["$window",  ($window) => {
         }
     };
 }]); 
-app.controller('myController' ,  ($scope , $timeout) => {
+app.controller("myController" ,  ($scope , $timeout) => {
     $scope.beforeIndex = {}; 
     $scope.container = {};
     const obj = new Index();   
@@ -44,53 +43,53 @@ app.controller('myController' ,  ($scope , $timeout) => {
         $timeout( () => {
             $scope.beforeIndex[$scope.file.name] = angular.copy($scope.file);
         } , 200); // loads file after 200 microseconds
-    }
+    };
     $scope.createIndex = (fName) => {
         let fileContents = $scope.beforeIndex[fName];
-        let x = JSON.stringify(fileContents)
+        let x = JSON.stringify(fileContents);
         try{
-        JSON.parse(x)
-        let success = obj.createIndex(fileContents);   
-        if (success) {
-            alert ('The operation was successful.');    
-            let result = obj.getIndex();
-            let fileLength = result[fileContents.name].uploadedFile;
-            $timeout( () => {
-                $scope.container[fileContents.name] = {
-                    dataAfterIndexed: result[fileContents.name],
-                    length: ( () => {
-                        let emptyArray = [];
-                        for (let x = 0; x < fileLength.length; x++) {
-                            emptyArray.push(x);
-                        }
-                        return emptyArray;
-                    })()
-                }
-            }, 200);
-        } else {
-            alert('The operation was not successful.');
-        }
-    }catch(e){alert('Invalid JSON file');}
-    }
+            JSON.parse(x);
+            let success = obj.createIndex(fileContents);   
+            if (success) {
+                alert ("The operation was successful.");
+                let result = obj.getIndex();
+                let fileLength = result[fileContents.name].uploadedFile;
+                $timeout( () => {
+                    $scope.container[fileContents.name] = {
+                        dataAfterIndexed: result[fileContents.name],
+                        length: ( () => {
+                            let emptyArray = [];
+                            for (let x = 0; x < fileLength.length; x++) {
+                                emptyArray.push(x);
+                            }
+                            return emptyArray;
+                        })()
+                    };
+                }, 200);
+            } else {
+                alert("The operation was not successful.");
+            }
+        }catch(e){alert("Invalid JSON file");}
+    };
     $scope.searchIndex =  () => {
         let fName = $scope.selectedFile;
         let txtSearch = $scope.txtSearch;
         if (!txtSearch) {
-            alert('You haven\'t provided anything to be searched.');
+            alert("You haven\'t provided anything to be searched.");
         }
         else if (Object.keys($scope.beforeIndex).length <= 0) {
-            alert('Unable to find an indexed file')
+            alert("Unable to find an indexed file");
         }
         else{
-            $scope.searchResults = obj.searchIndex(fName , txtSearch)
+            $scope.searchResults = obj.searchIndex(fName , txtSearch);
         }
         for(let i in $scope.searchResults){
             $scope.beforeIndex[i] = {
                 name:i,
                 index:$scope.searchResults[i],
-            }
+            };
         }
-    }
+    };
 
 });
 
