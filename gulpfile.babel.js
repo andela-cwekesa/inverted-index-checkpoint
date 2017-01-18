@@ -4,6 +4,7 @@
  */
 const gulp = require("gulp"),
   less = require("gulp-less"),
+  istanbul = require("gulp-istanbul"),
   livereload = require("gulp-livereload"),
   cleanCSS = require("gulp-clean-css"),
   jasmine = require("gulp-jasmine"),
@@ -54,7 +55,21 @@ gulp.task("test1",  () => {
   gulp.watch("./public/src/*.js").on("change", browserSync2.reload);
 }); 
 
-gulp.task("test" , () => {
+gulp.task("test" ,["pre-test"], () => {
   gulp.src("./jasmine/spec/inverted-index-test.js")
-    .pipe(jasmine());
+    .pipe(jasmine())
+    .pipe(istanbul.writeReports())
+    .pipe(istanbul.enforceThresholds({
+      thresholds: { global: 90 }
+    }));
+});
+
+gulp.task("pre-test",  () => {
+  return gulp.src(["public/src/**/*.js"])
+    // Covering files
+    .pipe(istanbul())
+    // Write the covered files to a temporary directory
+    .pipe(gulp.dest("test-tmp/"))
+    // Force `require` to return covered files
+    .pipe(istanbul.hookRequire());
 });
