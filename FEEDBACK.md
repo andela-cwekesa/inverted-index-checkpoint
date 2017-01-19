@@ -34,7 +34,7 @@
 - Remove console logs in code ================> done
 
 ## Facilitator
-13/01/16
+13/01/17
 - Add name of file in the indexed table ===> done
 - search results to be user friendly ==========> done
 - display the search results in something like a modal to be easily seen by the user  ==============>done
@@ -46,7 +46,7 @@
 
 
 ## 
-17/01/16
+17/01/17
 - space line 3  ===============> done
 - class line one. ================> done
 - function to be removed  =================> done
