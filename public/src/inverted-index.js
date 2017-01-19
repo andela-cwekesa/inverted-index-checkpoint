@@ -1,9 +1,9 @@
 /** @class representing an Index. */
 module.exports = class Index {
   /**
-     * Creates Index constructor.
+     * Constructor initializes container to an empty object.
      */
-  constructor(){
+  constructor() {
     this.container = {};
   }
   /**
@@ -11,7 +11,7 @@ module.exports = class Index {
    * @param {string} fileContents
    */
   fileCheck(fileContents) {
-    if (fileContents.files === undefined) {
+    if (!fileContents.files) {
       return this.message = {
         type: "fileEmpty",
         status: false,
@@ -57,15 +57,15 @@ module.exports = class Index {
   
   checkIndex (words , file , source , id ) {
     words.forEach( (word) => {
-      let the = this.sanitizeInput(word);
-      if (this.container[file][the] === undefined) {    
-        this.container[file][the] = {};   
-        this.container[file][the][id] = {
+      let theword = this.sanitizeInput(word);
+      if (!this.container[file][theword]) {    
+        this.container[file][theword] = {};   
+        this.container[file][theword][id] = {
           source: source,
           file:file
         };
       } 
-      this.container[file][the][id] = {
+      this.container[file][theword][id] = {
         source: source,
         file: file
       };
@@ -79,10 +79,12 @@ module.exports = class Index {
   createIndex(fileContents) {
     let check = this.fileCheck(fileContents);
     if(check.type === "fileEmpty") {  
-      return check;
+      alert("It looks like you uploaded an empty JSON file.");
+      //return check;
     }
     else if(check.type === "invalidFormat") {
       alert("It looks like the file is in bad format.");
+      //return check;
     }
     else if (check.type === "fileValid") {
       let indFiles = fileContents.files;
@@ -132,6 +134,7 @@ module.exports = class Index {
     termsArray.forEach((i ,j) =>{
       if (name.hasOwnProperty(i)){
         searchResults[termsArray[j]] = name[i];
+        console.log(name[i])
       }
       else {    
         alert("Sorry , but nothing matched your search.");
