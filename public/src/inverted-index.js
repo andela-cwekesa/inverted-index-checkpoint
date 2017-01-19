@@ -79,7 +79,7 @@ module.exports = class Index {
   createIndex(fileContents) {
     let check = this.fileCheck(fileContents);
     if(check.type === "fileEmpty") {  
-      alert("It looks like you uploaded an empty JSON file.");
+      return check;
     }
     else if(check.type === "invalidFormat") {
       alert("It looks like the file is in bad format.");
