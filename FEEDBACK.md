@@ -1,7 +1,7 @@
 ## Facilitator
 
 ### UI 
-- The alert-info is unnecessary big. =====> done
+- The alert-info is unnecessarily big. =====> done
 - Properly left-align ==========> done
 - Use normal texts  ===========> done 
 - All elements in the div should be equidistant i.e padding inside the div ===========> done
@@ -46,9 +46,16 @@
 
 
 ## 
+17/01/16
+- space line 3  ===============> done
+- class line one. ================> done
+- function to be removed  =================> done
+- line of space between logical method --> lines 2 and 3. ============> done 
+- lines 4  ===============> done
+- coverage not working ===================> done
 
-- space line 3
-- class line one.
-- function to be removed 
-- line of space between logical method --> lines 2 and 3. 
-- lines 4 
+## Third Reviewers
+- Maintain consistency of styling braces ============> done
+- Use 2 spaces instead of 4 ===============> done
+- Document code in reference to <a href="http://usejsdoc.org/howto-es2015-classes.html">this</a>=> done
+- Remove space line 149 ================> done
