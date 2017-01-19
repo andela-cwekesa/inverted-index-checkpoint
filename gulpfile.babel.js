@@ -59,10 +59,7 @@ gulp.task("test1",["pre-test"],  () => {
 gulp.task("test" ,["pre-test"], () => {
   gulp.src("./jasmine/spec/inverted-index-test.js")
     .pipe(jasmine())
-    .pipe(istanbul.writeReports())
-    //.pipe(istanbul.enforceThresholds({
-      //thresholds: { global: 90 }
-    //}));
+    .pipe(istanbul.writeReports());
 });
 
 gulp.task("pre-test",  () => {
