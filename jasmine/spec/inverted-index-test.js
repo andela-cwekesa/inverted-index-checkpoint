@@ -1,6 +1,9 @@
-// Test data that will used in testing.It is like a JSON mock file
-// Most of validations references are done on this file
+// import file
 let Index = require("../../public/src/inverted-index.js");
+/**
+ * Test data that will used in testing.It is like a JSON mock file
+ * Most of validations references are done on this file
+ */
 const testData =  [
   {
     "title": "Alice in Wonderland",
@@ -12,41 +15,41 @@ const testData =  [
     "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
   }
 ];
+
 let filename = 'books.json';
 const obj = new Index();
 describe("Read book data", () => {
-    it("verifies that JSON file passed is not empty",  () => {
-      expect(testData.length > 0).toBeTruthy();
-    }); 
-    it("should verify actually a file to be indexed is loaded" ,  () => {
-      expect(testData).toBeTruthy();
+  it("verifies that JSON file passed is not empty",  () => {
+    expect(testData.length > 0).toBeTruthy();
+  }); 
+  it("should verify actually a file to be indexed is loaded" ,  () => {
+    expect(testData).toBeTruthy();
+  });
+  it("should ensure that the file content is actually a valid JSON Array" ,   () => {
+    expect((testData instanceof Array)).toBeTruthy();
+  });
+  it("should ensure that each object in JSON array contains a property whose value is a string" ,  () => {
+    testData.forEach((element) =>{
+    expect(typeof element.title === "string").toBeTruthy();
+    expect(typeof element.text  === "string").toBeTruthy();
     });
-    it("should ensure that the file content is actually a valid JSON Array" ,   () => {
-      expect((testData instanceof Array)).toBeTruthy();
-    });
-    it("should ensure that each object in JSON array contains a property whose value is a string" ,  () => {
-    	testData.forEach((element) =>{
-    	expect(typeof element.title === "string").toBeTruthy();
-    	expect(typeof element.text  === "string").toBeTruthy();
-    	});
-    }); 
-    it("should ensure the json file is in good format" ,  () => {
-      let goodFormat = eval(testData);
-      expect(goodFormat).toBeTruthy();
-    });
+  }); 
+  it("should ensure the json file is in good format" ,  () => {
+    let goodFormat = eval(testData);
+    expect(goodFormat).toBeTruthy();
+  });
 });
 // Populate Index test suite
 describe("Populate Index" , () => {  
-    it("should ensure index is created once JSON file has been read",  () => {
+  it("should ensure index is created once JSON file has been read",  () => {
         // file object 
-      let jsonfile = {
-        name: "testFile",
-        files: testData[0]
-      };     
-      let created = obj.createIndex(jsonfile);
-      expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
-    });
-
+    let jsonfile = {
+      name: "testFile",
+      files: testData[0]
+    };     
+    let created = obj.createIndex(jsonfile);
+    expect(created.message).toBe(jsonfile.name + " has been indexed successfully.")
+  });
 });
 describe("Check existence" , () => {
   it("should check that searchIndex method exists" , () => {
@@ -61,12 +64,12 @@ describe("Check existence" , () => {
 // Search index test suite
 // I have used a custom jasmine matcher
 describe("Search index" , () => {
-  it('ensures searchIndex can handle an array of search terms', ()=> {
-      obj.createIndex(testData, filename);
-      expect( ()=>{
-      obj.searchIndex('books.json', ['a', 'alice'], 'book', 'me', ['help', ['me', 'out']]);
-      }).not.toThrow(new Error());
-    });
+  it("ensures searchIndex can handle an array of search terms", ()=> {
+    obj.createIndex(testData, filename);
+    expect( ()=>{
+      obj.searchIndex("books.json", ["a", "alice"], "book", "me", ["help", ["me", "out"]]);
+    }).not.toThrow(new Error());
+  });
   beforeEach(() => {
     let hits = []; // initialize an empty array that will hold search hits
     jasmine.addMatchers({
