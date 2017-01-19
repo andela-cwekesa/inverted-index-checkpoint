@@ -63,7 +63,7 @@ gulp.task("test" ,["pre-test"], () => {
 });
 
 gulp.task("pre-test",  () => {
-  return gulp.src(["./public/src/inverted-index.js"])
+  return gulp.src(["./public/src/inverted-index.js","./jasmine/spec/inverted-index-test.js"])
     // Covering files
     .pipe(istanbul())
     // Force `require` to return covered files
