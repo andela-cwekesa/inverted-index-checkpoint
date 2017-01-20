@@ -8,6 +8,8 @@ Elastic search uses a structure called an inverted index, which is designed to a
 <br>
 <img src="https://cloud.githubusercontent.com/assets/24464034/22143631/c14bc92e-df0b-11e6-88f8-99a70b35f6b4.jpg"/>
 <br>
+<img src="https://cloud.githubusercontent.com/assets/24464034/22144063/6b667e94-df0d-11e6-9fd7-44c61ebf5248.jpg"/>
+<br>
 
 ### Core App Specification
 --------
