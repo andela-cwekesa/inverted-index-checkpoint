@@ -43,7 +43,7 @@ module.exports = class Index {
  * @return {string} return characters
  */
   sanitizeInput (content) {
-    let characters = content.trim().replace(/[.[,\]/#!$%\^&\*;:@{}=\-_`~()]/g, '').toLowerCase().split(' ');
+    let characters = content.trim().replace(/[.,:/#!$%^&*@]/g, '').toLowerCase().split(' ');
     return characters;
   }
   /**
