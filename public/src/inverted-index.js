@@ -80,11 +80,9 @@ module.exports = class Index {
     let check = this.fileCheck(fileContents);
     if(check.type === "fileEmpty") {  
       alert("It looks like you uploaded an empty JSON file.");
-      //return check;
     }
     else if(check.type === "invalidFormat") {
       alert("It looks like the file is in bad format.");
-      //return check;
     }
     else if (check.type === "fileValid") {
       let indFiles = fileContents.files;
@@ -134,7 +132,6 @@ module.exports = class Index {
     termsArray.forEach((i ,j) =>{
       if (name.hasOwnProperty(i)){
         searchResults[termsArray[j]] = name[i];
-        console.log(name[i])
       }
       else {    
         alert("Sorry , but nothing matched your search.");
