@@ -6,6 +6,8 @@
 Elastic search uses a structure called an inverted index, which is designed to allow very fast full-text searches. An inverted index consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears. <br>
 <img width="1263" alt="shot" src="https://cloud.githubusercontent.com/assets/24464034/21901046/3e1a6b0a-d907-11e6-8966-37dbcbbbee15.png">
 <br>
+<img src="![mac](https://cloud.githubusercontent.com/assets/24464034/22143631/c14bc92e-df0b-11e6-88f8-99a70b35f6b4.jpg)"/>
+<br>
 
 ### Core App Specification
 --------
