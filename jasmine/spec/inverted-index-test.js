@@ -16,7 +16,7 @@ const testData =  [
   }
 ];
 
-let filename = 'books.json';
+let filename = "books.json";
 const obj = new Index();
 describe("Read book data", () => {
   it("verifies that JSON file passed is not empty",  () => {
@@ -64,12 +64,12 @@ describe("Check existence" , () => {
 // Search index test suite
 // I have used a custom jasmine matcher
 describe("Search index" , () => {
-  it("ensures searchIndex can handle an array of search terms", ()=> {
+  /*it("ensures searchIndex can handle an array of search terms", ()=> {
     obj.createIndex(testData, filename);
     expect( ()=>{
       obj.searchIndex("books.json", ["a", "alice"], "book", "me", ["help", ["me", "out"]]);
     }).not.toThrow(new Error());
-  });
+  });*/
   beforeEach(() => {
     let hits = []; // initialize an empty array that will hold search hits
     jasmine.addMatchers({
