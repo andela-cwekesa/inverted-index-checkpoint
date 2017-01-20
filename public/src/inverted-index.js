@@ -13,24 +13,24 @@ module.exports = class Index {
   fileCheck(fileContents) {
     if (!fileContents.files) {
       return this.message = {
-        type: "fileEmpty",
+        type: 'fileEmpty',
         status: false,
-        message: fileContents.name + "is empty!"
+        message: fileContents.name + 'is empty!'
       };
     }
-    if (typeof fileContents === "object") {
+    if (typeof fileContents === 'object') {
       return this.message = {
-        type: "fileValid",
+        type: 'fileValid',
         status: true,
-        message: fileContents.name + " has been indexed successfully."
+        message: fileContents.name + ' has been indexed successfully.'
       };
     }
     let x = stringify(fileContents);                                                                                                                                                                                                           
     if ((JSON.parse(x)) === false) {
       return this.message = {
-        type: "invalidFormat",
+        type: 'invalidFormat',
         status: false,
-        message: fileContents.name + "Invalid format."
+        message: fileContents.name + 'Invalid format.'
       };
     }
   } 
@@ -78,13 +78,13 @@ module.exports = class Index {
 
   createIndex(fileContents) {
     let check = this.fileCheck(fileContents);
-    if(check.type === "fileEmpty") {  
-      alert("It looks like you uploaded an empty JSON file.");
+    if(check.type === 'fileEmpty') {  
+      alert('It looks like you uploaded an empty JSON file.');
     }
-    else if(check.type === "invalidFormat") {
-      alert("It looks like the file is in bad format.");
+    else if(check.type === 'invalidFormat') {
+      alert('It looks like the file is in bad format.');
     }
-    else if (check.type === "fileValid") {
+    else if (check.type === 'fileValid') {
       let indFiles = fileContents.files;
       let arr = [];
       this.container[fileContents.name] = {
@@ -97,9 +97,9 @@ module.exports = class Index {
       };
       for (let i = 0; i < indFiles.length; i++) {
         let doc = indFiles[i];
-        let splittedTitle = doc.title.split(" ");
+        let splittedTitle = doc.title.split(' ');
         this.checkIndex(splittedTitle, fileContents.name, doc, i);
-        let splittedText = doc.text.split(" ");
+        let splittedText = doc.text.split(' ');
         this.checkIndex(splittedText, fileContents.name, doc, i); 
       }     
       return check;
@@ -112,7 +112,7 @@ module.exports = class Index {
  * @param{string} name
  */
   getIndex (name) {
-    if (name && typeof name === "string") {
+    if (name && typeof name === 'string') {
       return this.container[name];
     } else {
       return this.container;
@@ -134,7 +134,7 @@ module.exports = class Index {
         searchResults[termsArray[j]] = name[i];
       }
       else {    
-        alert("Sorry , but nothing matched your search.");
+        alert('Sorry , but nothing matched your search.');
       }
     });
     return searchResults;
@@ -147,7 +147,7 @@ module.exports = class Index {
   searchIndex (currFile ,...searchTerm) {
     const searchResults = {};
     let termsArray = [];
-    if (typeof(searchTerm) === "string") {
+    if (typeof(searchTerm) === 'string') {
       termsArray = this.sanitizeInput(searchTerm);
     }
     else {
