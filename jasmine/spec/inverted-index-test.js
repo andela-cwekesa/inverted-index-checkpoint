@@ -1,5 +1,5 @@
 // import file
-const indexFile = require("../../public/src/inverted-index.js");
+const indexFile = require('../../public/src/inverted-index.js');
 
 /**
  * Test data that will used in testing.It is like a JSON mock file
