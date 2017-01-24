@@ -1,5 +1,6 @@
 // import file
-let Index = require("../../public/src/inverted-index.js");
+const indexFile = require("../../public/src/inverted-index.js");
+
 /**
  * Test data that will used in testing.It is like a JSON mock file
  * Most of validations references are done on this file
@@ -16,7 +17,7 @@ const testData =  [
   }
 ];
 
-const obj = new Index();
+const obj = new indexFile.Index();
 describe('Read book data', () => {
   it('verifies that JSON file passed is not empty',  () => {
     expect(testData.length > 0).toBeTruthy();
@@ -38,16 +39,16 @@ describe('Read book data', () => {
     expect(goodFormat).toBeTruthy();
   });
 });
+
 // Populate Index test suite
-describe('Populate Index' , () => {  
-  it('should ensure index is created once JSON file has been read',  () => {
-        // file object 
-    let jsonfile = {
+describe('Populate Index' , () => {
+  it('should ensure index is created once JSON file has been read', () => {
+    const jsonfile = {
       name: 'testFile',
       files: testData[0]
     };     
-    let created = obj.createIndex(jsonfile);
-    expect(created.message).toBe(jsonfile.name + ' has been indexed successfully.')
+    const created = obj.createIndex(jsonfile);
+    expect(created.message).toBe(`${jsonfile.name} ${' has been indexed successfully.'}`);
   });
 });
 describe('Check existence' , () => {
@@ -60,20 +61,20 @@ describe('Check existence' , () => {
     expect(gety).toBeTruthy();
   });
 }); 
+
 // Search index test suite
 // I have used a custom jasmine matcher
 describe('Search index' , () => {
   beforeEach(() => {
-    let hits = []; // initialize an empty array that will hold search hits
+    const hits = []; // initialize an empty array that will hold search hits
     jasmine.addMatchers({
       toHaveSomething: () =>{
         hits.length >0;
       }
     });
   });
-  it('test that verifies that searching the index returns an array of the indices.', () =>{
-        
-    let hitz = obj.searchIndex(testData);
+  it('test that verifies that searching the index returns an array of the indices.', () => {
+    const hitz = obj.searchIndex(testData);
     expect(hitz).toHaveSomething;
-  });    
+  });
 });
