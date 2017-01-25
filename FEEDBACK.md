@@ -63,11 +63,11 @@
 
 ## 23rd Defence Feedback
 23/01/2017
--indentation amount on line 3 to 4 not uniform =======> done
--avoid using module.exports .Export module direct and use babel to transfer down.use export direct
+- indentation amount on line 3 to 4 not uniform =======> done
+- avoid using module.exports .Export module direct and use babel to transfer down.use export direct
 - spacing between logic ===========> done
 - line 33 use string interpolation instead of string concatenation  ==========> done
 - fix everywhere where there is let.fix linter to airbnb and also approach jackie =============> done
 - use whitelist for sanitizing user input
--characters needed->alphanumeric characters
--lias with jackie for standard structure for doc blocks ===========> done
+- characters needed->alphanumeric characters
+- lias with jackie for standard structure for doc blocks ===========> done
