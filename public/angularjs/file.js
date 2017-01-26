@@ -9,7 +9,7 @@ app.directive('fileChange', ['$window', ($window) => {
 // FileReader is used to read the contents of a file
       const reader = new FileReader();
 // get access to element that triggered an event
-      element.bind('change',  (fc) => {    
+      element.bind('change', (fc) => {
         const fileContents = fc.target.files[0];  // Retrieves the first File from the FileList object (w3c file api)
         if (fileContents.name.indexOf('json') >= 0) {
           file = fileContents.name;
@@ -28,8 +28,9 @@ app.directive('fileChange', ['$window', ($window) => {
         control.$setViewValue({
           name: file,
           files: scope.$eval(reader.result),
-        });
-        
+          type: type,
+          size: size,
+        });      
         if (attr.selectedFile) {
           scope.$eval(attr.selectedFile);
         }
@@ -85,7 +86,7 @@ app.controller('myController', ($scope, $timeout) => {
       alert('Unable to find an indexed file');
     }
     else {
-      $scope.searchResults = obj.searchIndex(fName, txtSearch);
+      $scope.searchResults = obj.searchIndex(fName, ...txtSearch);
     }
     for(let i in $scope.searchResults) {
       $scope.beforeIndex[i] = {
