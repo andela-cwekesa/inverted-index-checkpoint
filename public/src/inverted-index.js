@@ -1,10 +1,10 @@
 /** @class representing an Index. */
 class Index {
 /**
-* Constructor initializes container to an empty object.
+* Constructor initializes indeces to an empty object.
 */
   constructor() {
-    this.container = {};
+    this.indeces = {};
   }
 
 /**
@@ -30,14 +30,6 @@ class Index {
         message: `${fileContents.name} ${' has been indexed successfully.'}`,
       };
     }
-    const fileString = stringify(fileContents);
-    if ((JSON.parse(fileString)) === false) {
-      return this.message = {
-        type: 'invalidFormat',
-        status: false,
-        message: `${fileContents.name} ${'Invalid format.'}`,
-      };
-    }
   }
 
 /**
@@ -49,7 +41,7 @@ class Index {
  * @returns {string} return characters
  */
   sanitizeInput(content) {
-    const characters = content.trim().replace(/[^a-z0-9\ ]/gi, '').toLowerCase().split(' ');
+    const characters = content.trim().replace(/[^a-z0-9 ]/gi, '').toLowerCase().split(' ');
     return characters;
   }
 
@@ -67,14 +59,14 @@ class Index {
   checkIndex(words, file, source, id) {
     words.forEach((word) => {
       const theword = this.sanitizeInput(word);
-      if (!this.container[file][theword]) {
-        this.container[file][theword] = {};
-        this.container[file][theword][id] = {
+      if (!this.indeces[file][theword]) {
+        this.indeces[file][theword] = {};
+        this.indeces[file][theword][id] = {
           source,
           file,
         };
       }
-      this.container[file][theword][id] = {
+      this.indeces[file][theword][id] = {
         source,
         file,
       };
@@ -86,28 +78,26 @@ class Index {
  *
  * method that creates indices
  *
- * @param {json} fileContents
+ * @param {object} fileContents
  * @returns {object} check
  */
   createIndex(fileContents) {
     const check = this.fileCheck(fileContents);
     if (check.type === 'fileEmpty') {
       alert('It looks like you uploaded an empty JSON file.');
-    } else if (check.type === 'invalidFormat') {
-      alert('It looks like the file is in bad format.');
     } else if (check.type === 'fileValid') {
-      const indFiles = fileContents.files;
-      const arr = [];
-      this.container[fileContents.name] = {
-        uploadedFile: (() => {
-          for (let i = 0; i < indFiles.length; i += 1) {
-            arr.push(i);
+      const filesToBeIndexed = fileContents.files;
+      const size = [];
+      this.indeces[fileContents.name] = {
+        fileLen: (() => {
+          for (let i = 0; i < filesToBeIndexed.length; i += 1) {
+            size.push(i);
           }
-          return arr;
+          return size;
         })(),
       };
-      for (let i = 0; i < indFiles.length; i += 1) {
-        const doc = indFiles[i];
+      for (let i = 0; i < filesToBeIndexed.length; i += 1) {
+        const doc = filesToBeIndexed[i];
         const splittedTitle = doc.title.split(' ');
         this.checkIndex(splittedTitle, fileContents.name, doc, i);
         const splittedText = doc.text.split(' ');
@@ -120,16 +110,16 @@ class Index {
 /**
  * @method getIndex
  *
- * method return index of files in container object
+ * method return index of files in indeces object
  *
  * @param {string} name
  * @returns {object}
  */
   getIndex(name) {
     if (name && typeof name === 'string') {
-      return this.container[name];
+      return this.indeces[name];
     } else {
-      return this.container;
+      return this.indeces;
     }
   }
 
@@ -172,12 +162,12 @@ class Index {
       termsArray = searchTerm;
     }
     if (!currFile) {
-      for (const i in this.container) {
-        searchResults[i] = this.searchFeedback(termsArray, this.container[i]);
+      for (const i in this.indeces) {
+        searchResults[i] = this.searchFeedback(termsArray, this.indeces[i]);
       }
     } else {
       try {
-        const file = this.container[currFile];
+        const file = this.indeces[currFile];
         searchResults[file] = this.searchFeedback(termsArray, file);
       } catch (e) {
         return null;
