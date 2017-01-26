@@ -153,14 +153,14 @@
                                     <th>#</th>
                                     <th>Term</th>
 
-                                    <th ng-repeat="idNo in files.length">Doc_{{ idNo }}</th>
+                                    <th ng-repeat="idNo in files.fileSize">Doc_{{ idNo }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="(word, fileFound) in files.dataAfterIndexed">
                                     <td>{{ $index + 1 }}</td>
                                       <td>{{ word }}</td>
-                                      <td ng-repeat="id in files.length">
+                                      <td ng-repeat="id in files.fileSize">
                                         <span ng-if="fileFound[id]">
                                           <i class="fa fa-remove" style="color: red"></i>
                                         </span>
