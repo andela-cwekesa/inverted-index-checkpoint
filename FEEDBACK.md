@@ -68,6 +68,7 @@
 - spacing between logic ===========> done
 - line 33 use string interpolation instead of string concatenation  ==========> done
 - fix everywhere where there is let.fix linter to airbnb and also approach jackie =============> done
-- use whitelist for sanitizing user input
-- characters needed->alphanumeric characters
+- use whitelist for sanitizing user input ============> done
+- characters needed->alphanumeric characters =============> done
 - lias with jackie for standard structure for doc blocks ===========> done
+- constructor not well aligned =========> done
