@@ -87,7 +87,6 @@ class Index {
       alert('It looks like you uploaded an empty JSON file.');
     } else if (check.type === 'fileValid') {
       const filesToBeIndexed = fileContents.files;
-      console.log(fileContents.files)
       const size = [];
       this.indices[fileContents.name] = {
         fileLen: (() => {
