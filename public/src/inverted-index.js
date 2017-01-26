@@ -1,10 +1,10 @@
 /** @class representing an Index. */
 class Index {
 /**
-* Constructor initializes indeces to an empty object.
+* Constructor initializes indices to an empty object.
 */
   constructor() {
-    this.indeces = {};
+    this.indices = {};
   }
 
 /**
@@ -59,14 +59,14 @@ class Index {
   checkIndex(words, file, source, id) {
     words.forEach((word) => {
       const theword = this.sanitizeInput(word);
-      if (!this.indeces[file][theword]) {
-        this.indeces[file][theword] = {};
-        this.indeces[file][theword][id] = {
+      if (!this.indices[file][theword]) {
+        this.indices[file][theword] = {};
+        this.indices[file][theword][id] = {
           source,
           file,
         };
       }
-      this.indeces[file][theword][id] = {
+      this.indices[file][theword][id] = {
         source,
         file,
       };
@@ -88,7 +88,7 @@ class Index {
     } else if (check.type === 'fileValid') {
       const filesToBeIndexed = fileContents.files;
       const size = [];
-      this.indeces[fileContents.name] = {
+      this.indices[fileContents.name] = {
         fileLen: (() => {
           for (let i = 0; i < filesToBeIndexed.length; i += 1) {
             size.push(i);
@@ -110,16 +110,16 @@ class Index {
 /**
  * @method getIndex
  *
- * method return index of files in indeces object
+ * method return index of files in indices object
  *
  * @param {string} name
  * @returns {object}
  */
   getIndex(name) {
     if (name && typeof name === 'string') {
-      return this.indeces[name];
+      return this.indices[name];
     } else {
-      return this.indeces;
+      return this.indices;
     }
   }
 
@@ -162,12 +162,12 @@ class Index {
       termsArray = searchTerm;
     }
     if (!currFile) {
-      for (const i in this.indeces) {
-        searchResults[i] = this.searchFeedback(termsArray, this.indeces[i]);
+      for (const i in this.indices) {
+        searchResults[i] = this.searchFeedback(termsArray, this.indices[i]);
       }
     } else {
       try {
-        const file = this.indeces[currFile];
+        const file = this.indices[currFile];
         searchResults[file] = this.searchFeedback(termsArray, file);
       } catch (e) {
         return null;
