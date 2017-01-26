@@ -72,3 +72,4 @@
 - characters needed->alphanumeric characters =============> done
 - lias with jackie for standard structure for doc blocks ===========> done
 - constructor not well aligned =========> done
+- use export instead of exports
