@@ -73,3 +73,7 @@
 - lias with jackie for standard structure for doc blocks ===========> done
 - constructor not well aligned =========> done
 - use export instead of exports
+
+##
+- avoid for loop.use forEach instead  =========> done
+- just call checkIndex method once i.e combine text and title ===========> done
