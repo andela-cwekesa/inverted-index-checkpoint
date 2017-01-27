@@ -56,7 +56,7 @@ class Index {
  * @param {object} source
  * @param {number} id
  */
-  checkIndex(words, file, source, id) {
+  checkIndex(words, textWords, file, source, id) {
     words.forEach((word) => {
       const theword = this.sanitizeInput(word);
       if (!this.indices[file][theword]) {
@@ -96,13 +96,12 @@ class Index {
           return size;
         })(),
       };
-      for (let i = 0; i < filesToBeIndexed.length; i += 1) {
+      filesToBeIndexed.forEach((i) => {
         const doc = filesToBeIndexed[i];
         const splittedTitle = doc.title.split(' ');
-        this.checkIndex(splittedTitle, fileContents.name, doc, i);
         const splittedText = doc.text.split(' ');
-        this.checkIndex(splittedText, fileContents.name, doc, i);
-      }
+        this.checkIndex(splittedTitle, splittedText, fileContents.name, doc, i);
+      });
       return check;
     }
   }
