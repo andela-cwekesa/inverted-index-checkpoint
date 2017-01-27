@@ -179,7 +179,7 @@ var Index = function () {
     value: function searchFeedback(termsArray, file) {
       var searchResults = {};
       termsArray.forEach(function (term, index) {
-        if (name.hasOwnProperty(term)) {
+        if (file.hasOwnProperty(term)) {
           searchResults[termsArray[index]] = file[term];
         } else {
           alert('Sorry , but nothing matched your search.');
