@@ -129,14 +129,14 @@ class Index {
  * takes terms of array and fetch result of each token.
  *
  * @param {array} termsArray
- * @param {object} name
+ * @param {object} file
  * @returns {object} searchResults
  */
-  searchFeedback(termsArray, name) {
+  searchFeedback(termsArray, file) {
     const searchResults = {};
     termsArray.forEach((term, index) => {
-      if (name.hasOwnProperty(term)) {
-        searchResults[termsArray[index]] = name[term];
+      if (file.hasOwnProperty(term)) {
+        searchResults[termsArray[index]] = file[term];
       } else {
         alert('Sorry , but nothing matched your search.');
       }
