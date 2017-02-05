@@ -25,3 +25,6 @@ test-tmp
 .DS_Store
 jasmine/books.sublime-workspace
 MIT.LICENSE
+.babelrc
+.eslintric
+public/angularjs/angular.js
