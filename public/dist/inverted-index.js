@@ -81,7 +81,7 @@ var Index = function () {
 
   }, {
     key: 'checkIndex',
-    value: function checkIndex(words, file, source, id) {
+    value: function checkIndex(words, textWords, file, source, id) {
       var _this = this;
 
       words.forEach(function (word) {
@@ -129,13 +129,20 @@ var Index = function () {
               return size;
             }()
           };
-          for (var i = 0; i < filesToBeIndexed.length; i += 1) {
+          /*for (let i = 0; i < filesToBeIndexed.length; i += 1) {
+            const doc = filesToBeIndexed[i];
+            const splittedTitle = doc.title.split(' ');
+            const splittedText = doc.text.split(' ');
+            this.checkIndex(splittedTitle, splittedText, fileContents.name, doc, i);
+            
+            //this.checkIndex(splittedText, fileContents.name, doc, i);
+          }*/
+          filesToBeIndexed.forEach(function (i) {
             var doc = filesToBeIndexed[i];
             var splittedTitle = doc.title.split(' ');
-            _this2.checkIndex(splittedTitle, fileContents.name, doc, i);
             var splittedText = doc.text.split(' ');
-            _this2.checkIndex(splittedText, fileContents.name, doc, i);
-          }
+            _this2.checkIndex(splittedTitle, splittedText, fileContents.name, doc, i);
+          });
           return {
             v: check
           };
@@ -170,7 +177,7 @@ var Index = function () {
      * takes terms of array and fetch result of each token.
      *
      * @param {array} termsArray
-     * @param {object} name
+     * @param {object} file
      * @returns {object} searchResults
      */
 

@@ -99,8 +99,9 @@ class Index {
       filesToBeIndexed.forEach((i) => {
         const doc = filesToBeIndexed[i];
         const splittedTitle = doc.title.split(' ');
+        this.checkIndex(splittedTitle, fileContents.name, doc, i);
         const splittedText = doc.text.split(' ');
-        this.checkIndex(splittedTitle, splittedText, fileContents.name, doc, i);
+        this.checkIndex(splittedText, fileContents.name, doc, i);
       });
       return check;
     }
@@ -148,11 +149,11 @@ class Index {
  *
  * looks for search terms in created index
  *
- * @param {object} currFile
+ * @param {object} currentFile
  * @param {array} searchTerm
  * @returns {object} searchResults
  */
-  searchIndex(currFile, ...searchTerm) {
+  searchIndex(currentFile, ...searchTerm) {
     const searchResults = {};
     let termsArray = [];
     if (typeof (searchTerm) === 'string') {
@@ -160,13 +161,13 @@ class Index {
     } else {
       termsArray = searchTerm;
     }
-    if (!currFile) {
+    if (!currentFile) {
       for (const i in this.indices) {
         searchResults[i] = this.searchFeedback(termsArray, this.indices[i]);
       }
     } else {
       try {
-        const file = this.indices[currFile];
+        const file = this.indices[currentFile];
         searchResults[file] = this.searchFeedback(termsArray, file);
       } catch (e) {
         return null;
