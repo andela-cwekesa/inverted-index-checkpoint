@@ -1,2 +1,2 @@
 jshint:
-  enabled: false
+  config_file: .jshintrc
