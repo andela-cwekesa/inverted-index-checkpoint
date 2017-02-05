@@ -1,2 +1,5 @@
 jshint:
   config_file: .jshintrc
+
+public/angularjs:
+  enabled: false
