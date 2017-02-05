@@ -23,3 +23,5 @@ public/dist
 public/design
 test-tmp
 .DS_Store
+jasmine/books.sublime-workspace
+MIT.LICENSE
