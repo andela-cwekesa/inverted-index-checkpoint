@@ -50,9 +50,9 @@ app.controller('myController', ($scope, $timeout) => {
     };
     $scope.createIndex = (fName) => {
       const fileContents = $scope.beforeIndex[fName];
-      const x = JSON.stringify(fileContents);
+      const stringified = JSON.stringify(fileContents);
       try {
-        JSON.parse(x);
+        JSON.parse(stringified);
         const success = obj.createIndex(fileContents);
         if (success) {
           alert ('The operation was successful.');
