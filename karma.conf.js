@@ -23,12 +23,7 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
     ],
-// plugins:[
-//              'karma-jasmine',
-//              'coveralls' ,
-//              'karma-coverage',
-//              'karma-chrome-launcher',
-//              ],
+    
 customLaunchers: {
       Chrome_travis_ci: {
         base: 'Chrome',
