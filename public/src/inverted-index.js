@@ -174,4 +174,4 @@ class Index {
 // export { Index as default };
 window.Index = Index;
 // module.exports = Index;
-export default Index ;
+export default Index;

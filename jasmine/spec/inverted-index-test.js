@@ -1,5 +1,5 @@
 // import file
- const Index = require('../../public/dist/inverted-index.js');
+ //const Index = require('../../public/dist/inverted-index.js');
  // const Index = require('../../public/src/inverted-index.js');
 
 /**
