@@ -31,7 +31,11 @@ class Index {
       };
     }
   }
-
+/**
+ * @method isJSON
+ * @param {string} fileData
+ * param
+ */
   isJSON(fileData) {
     fileData = typeof fileData !== 'string' ? JSON.stringify(fileData) : fileData;
     try {
