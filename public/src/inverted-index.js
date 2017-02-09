@@ -34,7 +34,7 @@ class Index {
 /**
  * @method isJSON
  *
- * Converts passed string into an object
+ * Converts passed string into a JSON object
  *
  * @param {string} fileData
  */
