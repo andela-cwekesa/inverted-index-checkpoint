@@ -66,7 +66,7 @@ app.controller('myController', ($scope, $timeout) => {
       const stringified = JSON.stringify(fileContents);
       try {
         JSON.parse(stringified);
-        const success = obj.createIndex(fileContents);
+        const success = obj.createIndex(fileContents.name, fileContents.files);
         if (success) {
           swal({
             title: 'Success!',

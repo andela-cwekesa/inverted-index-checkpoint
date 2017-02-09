@@ -51,13 +51,13 @@
      files: testData,
    };
 
-   const created = instance.createIndex(jsonfile);
+   const created = instance.createIndex(jsonfile.name, jsonfile.files);
    it('should ensure index is created once JSON file has been read', () => {
      expect(created.message).toBe(`${jsonfile.name} ${' has been indexed successfully.'}`);
    });
 
    it('ensures created index is correct', () => {
-     instance.createIndex(jsonfile);
+     instance.createIndex(jsonfile.name, jsonfile.files);
      const indexCreated = instance.getIndex(jsonfile.name);
      expect(Array.from(indexCreated.a)).toEqual([0, 1]);
    });
@@ -70,7 +70,7 @@
    };
 
    it('should check that search index returns correct results', () => {
-     instance.createIndex(jsonfile);
+     instance.createIndex(jsonfile.name, jsonfile.files);
      expect(instance.searchIndex(jsonfile.name, 'alice')).toEqual({ testFile: { alice: [0] } });
      expect(instance.searchIndex(jsonfile.name, 'of')).toEqual({ testFile: { of: [0, 1] } });
      expect(instance.searchIndex(jsonfile.name, 'lord')).toEqual({ testFile: { lord: [1] } });

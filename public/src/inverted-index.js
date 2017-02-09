@@ -88,8 +88,12 @@ class Index {
  * @param {object} fileContents
  * @returns {object} check
  */
-  createIndex(fileContents) {
-    const check = this.fileCheck(fileContents);
+  createIndex(fileName, fileContents) {
+    const obj = {
+      name: fileName,
+      files: fileContents
+    };
+    const check = this.fileCheck(obj);
     if (check.type === 'fileEmpty') {
       swal({
         title: 'Empty File!',
@@ -99,13 +103,13 @@ class Index {
         timer: 2500,
       });
     } else if (check.type === 'fileValid') {
-      const filesToBeIndexed = fileContents.files;
-      this.indices[fileContents.name] = {
+      const filesToBeIndexed = fileContents;
+      this.indices[fileName] = {
         fileLen: filesToBeIndexed.length,
       };
       filesToBeIndexed.forEach((doc, index) => {
         const splitTextAndTitle = `${doc.text} ${doc.title}`.split(' ');
-        this.checkIndex(splitTextAndTitle, fileContents.name, index);
+        this.checkIndex(splitTextAndTitle, fileName, index);
       });
       return check;
     }

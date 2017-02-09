@@ -50,6 +50,12 @@ var Index = function () {
         };
       }
     }
+    /**
+     * @method isJSON
+     * @param {string} fileData
+     * param
+     */
+
   }, {
     key: 'isJSON',
     value: function isJSON(fileData) {
@@ -115,10 +121,14 @@ var Index = function () {
 
   }, {
     key: 'createIndex',
-    value: function createIndex(fileContents) {
+    value: function createIndex(fileName, fileContents) {
       var _this2 = this;
 
-      var check = this.fileCheck(fileContents);
+      var obj = {
+        name: fileName,
+        files: fileContents
+      };
+      var check = this.fileCheck(obj);
       if (check.type === 'fileEmpty') {
         swal({
           title: 'Empty File!',
@@ -128,13 +138,13 @@ var Index = function () {
           timer: 2500
         });
       } else if (check.type === 'fileValid') {
-        var filesToBeIndexed = fileContents.files;
-        this.indices[fileContents.name] = {
+        var filesToBeIndexed = fileContents;
+        this.indices[fileName] = {
           fileLen: filesToBeIndexed.length
         };
         filesToBeIndexed.forEach(function (doc, index) {
           var splitTextAndTitle = (doc.text + ' ' + doc.title).split(' ');
-          _this2.checkIndex(splitTextAndTitle, fileContents.name, index);
+          _this2.checkIndex(splitTextAndTitle, fileName, index);
         });
         return check;
       }
@@ -218,11 +228,8 @@ var Index = function () {
 
   return Index;
 }();
-// export { Index as default };
-
 
 window.Index = Index;
-// module.exports = Index;
 exports.default = Index;
 
 },{}]},{},[1]);
