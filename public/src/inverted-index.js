@@ -13,7 +13,6 @@ class Index {
  * Checks if file is empty, valid or object
  *
  * @param {string} fileContents
- * @returns {object}
  */
   fileCheck(fileContents) {
     if (!fileContents.files) {
@@ -90,12 +89,11 @@ class Index {
  *
  * @param {string} fileName
  * @param {object} fileContents
- * @returns {object} check
  */
   createIndex(fileName, fileContents) {
     const obj = {
       name: fileName,
-      files: fileContents
+      files: fileContents,
     };
     const check = this.fileCheck(obj);
     if (check.type === 'fileEmpty') {
