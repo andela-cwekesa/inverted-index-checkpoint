@@ -1,0 +1,5 @@
+jasmine/spec/**
+public/angularjs/**
+karma.conf.js
+gulpfile.babel.js
+public/dist/**

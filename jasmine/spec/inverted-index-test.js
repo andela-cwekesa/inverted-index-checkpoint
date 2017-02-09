@@ -1,13 +1,8 @@
-/**
- * Test data that will used in testing.It is like a JSON mock file
- * Most of validations references are done on this file
- */
  const testData = [
    {
      title: 'Alice in Wonderland',
      text: 'Alice falls into a rabbit hole and enters a world full of imagination ring.',
    },
-
    {
      title: 'The Lord of the Rings: The Fellowship of the Ring.',
      text: 'An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring.',
@@ -15,8 +10,8 @@
  ];
  const instance = new Index();
 
- describe('Read book data', () => {
-   it('verifies that JSON file read is valid JSON Array', () => {
+ describe('Read Book Data', () => {
+   it('verifies that the JSON file read is a valid JSON Array', () => {
      expect(instance.isJSON(testData).length).toBeDefined;
    });
 
@@ -24,24 +19,11 @@
      expect(instance.isJSON(testData).length).toBe(2);
    });
 
-   it('should verify actually a file to be indexed is loaded', () => {
-     expect(testData).toBeTruthy();
-   });
-
-   it('should ensure that the file content is actually a valid JSON Array', () => {
-     expect((testData instanceof Array)).toBeTruthy();
-   });
-
    it('should ensure that each object in JSON array contains a property whose value is a string', () => {
      testData.forEach((element) => {
      expect(typeof element.title === 'string').toBeTruthy();
      expect(typeof element.text === 'string').toBeTruthy();
      });
-   });
-
-   it('should ensure the json file is in good format', () => {
-     const goodFormat = eval(testData);
-     expect(goodFormat).toBeTruthy();
    });
  });
 

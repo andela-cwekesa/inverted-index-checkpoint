@@ -10,7 +10,7 @@ class Index {
 /**
  * @method fileCheck
  *
- * checks if file is empty, valid or object
+ * Checks if file is empty, valid or object
  *
  * @param {string} fileContents
  * @returns {object}
@@ -31,10 +31,13 @@ class Index {
       };
     }
   }
+
 /**
  * @method isJSON
+ *
+ * Converts passed string into an object
+ *
  * @param {string} fileData
- * param
  */
   isJSON(fileData) {
     fileData = typeof fileData !== 'string' ? JSON.stringify(fileData) : fileData;
@@ -48,7 +51,7 @@ class Index {
 /**
  * @method sanitizeInput
  *
- * it sanitizes input to alphanumeric only
+ * It sanitizes input to alphanumeric only
  *
  * @param {string} content
  * @returns {string} return characters
@@ -63,7 +66,7 @@ class Index {
  *
  * Method which accepts `required` params for indexing a
  * json file.
- * it stores indices in an object ==> this.indices.
+ * It stores indices in an object ==> this.indices.
  *
  * @param {array} words
  * @param {string} file
@@ -83,8 +86,9 @@ class Index {
 /**
  * @method createIndex
  *
- * method that creates indices
+ * Method that creates indices
  *
+ * @param {string} fileName
  * @param {object} fileContents
  * @returns {object} check
  */
@@ -118,7 +122,7 @@ class Index {
 /**
  * @method getIndex
  *
- * method return index of files in indices object
+ * Method return index of files in indices object
  *
  * @param {string} name
  * @returns {object}
@@ -133,7 +137,7 @@ class Index {
 /**
  * @method searchFeedback
  *
- * takes terms of array and fetch result of each token.
+ * Takes terms of array and fetch result of each token.
  *
  * @param {array} termsArray
  * @param {object} file
@@ -154,24 +158,24 @@ class Index {
 /**
  * @method searchIndex
  *
- * looks for search terms in created index
+ * Looks for search terms in created index
  *
- * @param {object} currFile
+ * @param {object} currentFile
  * @param {array} searchTerm
  * @returns {object} searchResults
  */
-  searchIndex(currFile, ...searchTerm) {
+  searchIndex(currentFile, ...searchTerm) {
     const searchResults = {};
     let termsArray = [];
     termsArray = this.sanitizeInput(searchTerm[0]);
-    if (!currFile) {
+    if (!currentFile) {
       Object.keys(this.indices).forEach((fileName) => {
         searchResults[fileName] = this.searchFeedback(termsArray, this.indices[fileName]);
       });
     } else {
       try {
-        const file = this.indices[currFile];
-        searchResults[currFile] = this.searchFeedback(termsArray, file);
+        const file = this.indices[currentFile];
+        searchResults[currentFile] = this.searchFeedback(termsArray, file);
       } catch (e) {
         return null;
       }
@@ -179,5 +183,6 @@ class Index {
     return searchResults;
   }
 }
+
 window.Index = Index;
 export default Index;

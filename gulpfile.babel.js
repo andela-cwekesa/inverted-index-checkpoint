@@ -1,7 +1,3 @@
-/**
- * This file is dependent on gulp which automate tasks.
- * Author : # Collins
- */
 const gulp = require('gulp'),
   less = require('gulp-less'),
   istanbul = require('gulp-istanbul'),
@@ -18,22 +14,24 @@ const browserSync2 = require('browser-sync').create();
 const browserSync = require('browser-sync').create();
 
 gulp.task('default', ['front', 'test1', 'transpile']);
+
 gulp.task('css', () => {
   gulp.src('public/design/css/*.css')
     .pipe(cleanCSS())
     .pipe(gulp.dest('css'))
     .pipe(livereload('.public/index.html'));
 });
+
 gulp.task('watch', () => {
   livereload.listen();
   gulp.watch('public/design/css/*.css', ['css']);
 });
 
-// A task that ensures the javascript task is complete before reloading browsers
 gulp.task('js-watch', ['js'], (done) => {
   browserSync.reload();
   done();
 });
+
 gulp.task('front', () => {
   browserSync1.init({
     server: {
@@ -44,9 +42,10 @@ gulp.task('front', () => {
       port: 3070,
     },
   });
-    // Tracks html,js and css changes.I have used to allow reload
+
   gulp.watch('./public/**/*.{html,js,css}').on('change', browserSync1.reload);
 });
+
 gulp.task('test1', ['pre-test'], () => {
   browserSync2.init({
     server: {
@@ -77,9 +76,7 @@ gulp.task('test', ['pre-test'], () => {
 
 gulp.task('pre-test', () => {
   return gulp.src(['./jasmine/spec/inverted-index-test.js'])
-    // Covering files
     .pipe(istanbul())
-    // Force `require` to return covered files
     .pipe(istanbul.hookRequire());
 });
 
@@ -91,4 +88,3 @@ gulp.task('transpile', () => {
     .pipe(source('inverted-index.js'))
     .pipe(gulp.dest('public/dist'));
 });
-
