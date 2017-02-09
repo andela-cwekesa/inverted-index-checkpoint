@@ -18,9 +18,22 @@ app.directive('fileChange', ['$window', ($window) => {
 // reading data in the file
           const read = reader.readAsText(fileContents);
         } else if (!fileContents) {
-          $window.alert ('Unable to load the file.Please retry');
+          swal({
+            title: 'Unsuccessful.',
+            text: 'Unable to load the file.Please retry',
+            type: 'error',
+            confirmButtonText: 'Close',
+            timer: 2000,
+          });
         } else {
-          $window.alert('Please , strictly select a JSON file.');
+          swal({
+            title: 'Invalid JSON File.',
+            text: 'Please , strictly select a JSON file.',
+            type: 'error',
+            confirmButtonText: 'Close',
+            timer: 2500,
+          });
+          
         }           
       });
       reader.onload = () => {
@@ -55,35 +68,63 @@ app.controller('myController', ($scope, $timeout) => {
         JSON.parse(stringified);
         const success = obj.createIndex(fileContents);
         if (success) {
-          alert ('The operation was successful.');
+          swal({
+            title: 'Success!',
+            text: 'The index was created successfully.',
+            type: 'success',
+            confirmButtonText: 'Close',
+            timer: 2000,
+          });
           const result = obj.getIndex();
           const fileLength = result[fileContents.name].fileLen;
+          delete result[fileContents.name].fileLen;
           $timeout(() => {
             $scope.container[fileContents.name] = {
               dataAfterIndexed: result[fileContents.name],
               fileSize: (() => {
-                const size = [];
-                for (let i = 0; i < fileLength.length; i += 1) {
-                  size.push(i);
-                }
-                return size;
+                return Array.from({ length: fileLength }, (value, index) => index);
               })(),
             };
           }, 200);
         } else {
-          alert('The operation was not successful.');
+          swal({
+            title: 'Unsuccessful.',
+            text: 'Unsuccessful.Please check the file',
+            type: 'warning',
+            confirmButtonText: 'Close',
+            timer: 2000,
+          });
         }
-      } catch (e)
-    { alert('Invalid JSON file'); }
+      } catch (e) {
+        swal({
+            title: 'Error!',
+            text: 'The operation was not successful.',
+            type: 'error',
+            confirmButtonText: 'Close',
+            timer: 2000,
+          });
+      }
     };
   $scope.searchIndex = () => {
     const fName = $scope.selectedFile;
     const txtSearch = $scope.txtSearch;
     if (!txtSearch) {
-      alert('You haven\'t provided anything to be searched.');
+      swal({
+        title: 'No search item.',
+        text: 'You haven\'t provided anything to be searched.',
+        type: 'warning',
+        confirmButtonText: 'Close',
+        timer: 2000,
+      });
     }
     else if (Object.keys($scope.beforeIndex).length <= 0) {
-      alert('Unable to find an indexed file');
+      swal({
+        title: 'Not Found!',
+        text: 'Unable to find an indexed file.',
+        type: 'warning',
+        confirmButtonText: 'Close',
+        timer: 2000,
+      });
     }
     else {
       $scope.searchResults = obj.searchIndex(fName, txtSearch);

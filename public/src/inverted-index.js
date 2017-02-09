@@ -32,6 +32,15 @@ class Index {
     }
   }
 
+  isJSON(fileData) {
+    fileData = typeof fileData !== 'string' ? JSON.stringify(fileData) : fileData;
+    try {
+      return JSON.parse(fileData);
+    } catch (error) {
+      return false;
+    }
+  }
+
 /**
  * @method sanitizeInput
  *
@@ -48,28 +57,22 @@ class Index {
 /**
  * @method checkIndex
  *
- * method that creates object of indices and check
- * if word has been indexed before
+ * Method which accepts `required` params for indexing a
+ * json file.
+ * it stores indices in an object ==> this.indices.
  *
  * @param {array} words
  * @param {string} file
- * @param {object} source
  * @param {number} id
  */
-  checkIndex(words, textWords, file, source, id) {
+  checkIndex(words, file, id) {
     words.forEach((word) => {
       const theword = this.sanitizeInput(word);
       if (!this.indices[file][theword]) {
-        this.indices[file][theword] = {};
-        this.indices[file][theword][id] = {
-          source,
-          file,
-        };
+        this.indices[file][theword] = new Set();
+        this.indices[file][theword].add(id);
       }
-      this.indices[file][theword][id] = {
-        source,
-        file,
-      };
+      this.indices[file][theword].add(id);
     });
   }
 
@@ -84,24 +87,21 @@ class Index {
   createIndex(fileContents) {
     const check = this.fileCheck(fileContents);
     if (check.type === 'fileEmpty') {
-      alert('It looks like you uploaded an empty JSON file.');
+      swal({
+        title: 'Empty File!',
+        text: 'It looks like you uploaded an empty JSON file.',
+        type: 'error',
+        confirmButtonText: 'Close',
+        timer: 2500,
+      });
     } else if (check.type === 'fileValid') {
       const filesToBeIndexed = fileContents.files;
-      const size = [];
       this.indices[fileContents.name] = {
-        fileLen: (() => {
-          for (let i = 0; i < filesToBeIndexed.length; i += 1) {
-            size.push(i);
-          }
-          return size;
-        })(),
+        fileLen: filesToBeIndexed.length,
       };
-      filesToBeIndexed.forEach((i) => {
-        const doc = filesToBeIndexed[i];
-        const splittedTitle = doc.title.split(' ');
-        this.checkIndex(splittedTitle, fileContents.name, doc, i);
-        const splittedText = doc.text.split(' ');
-        this.checkIndex(splittedText, fileContents.name, doc, i);
+      filesToBeIndexed.forEach((doc, index) => {
+        const splitTextAndTitle = `${doc.text} ${doc.title}`.split(' ');
+        this.checkIndex(splitTextAndTitle, fileContents.name, index);
       });
       return check;
     }
@@ -118,9 +118,8 @@ class Index {
   getIndex(name) {
     if (name && typeof name === 'string') {
       return this.indices[name];
-    } else {
-      return this.indices;
     }
+    return this.indices;
   }
 
 /**
@@ -136,9 +135,9 @@ class Index {
     const searchResults = {};
     termsArray.forEach((term, index) => {
       if (file.hasOwnProperty(term)) {
-        searchResults[termsArray[index]] = file[term];
+        searchResults[termsArray[index]] = Array.from(file[term]);
       } else {
-        alert('Sorry , but nothing matched your search.');
+        searchResults[term] = [];
       }
     });
     return searchResults;
@@ -149,26 +148,22 @@ class Index {
  *
  * looks for search terms in created index
  *
- * @param {object} currentFile
+ * @param {object} currFile
  * @param {array} searchTerm
  * @returns {object} searchResults
  */
-  searchIndex(currentFile, ...searchTerm) {
+  searchIndex(currFile, ...searchTerm) {
     const searchResults = {};
     let termsArray = [];
-    if (typeof (searchTerm) === 'string') {
-      termsArray = this.sanitizeInput(searchTerm);
-    } else {
-      termsArray = searchTerm;
-    }
-    if (!currentFile) {
-      for (const i in this.indices) {
-        searchResults[i] = this.searchFeedback(termsArray, this.indices[i]);
-      }
+    termsArray = this.sanitizeInput(searchTerm[0]);
+    if (!currFile) {
+      Object.keys(this.indices).forEach((fileName) => {
+        searchResults[fileName] = this.searchFeedback(termsArray, this.indices[fileName]);
+      });
     } else {
       try {
-        const file = this.indices[currentFile];
-        searchResults[file] = this.searchFeedback(termsArray, file);
+        const file = this.indices[currFile];
+        searchResults[currFile] = this.searchFeedback(termsArray, file);
       } catch (e) {
         return null;
       }
@@ -179,3 +174,4 @@ class Index {
 window.Index = Index;
 
 export default Index;
+// module.exports = Index;
