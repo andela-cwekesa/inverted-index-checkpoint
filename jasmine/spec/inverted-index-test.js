@@ -1,5 +1,5 @@
 // import file
- // const Index = require('../../public/dist/inverted-index.js');
+ const Index = require('../../public/dist/inverted-index.js');
  // const Index = require('../../public/src/inverted-index.js');
 
 /**
@@ -17,8 +17,6 @@
      text: 'An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring.',
    },
  ];
-
- const fileName = 'books.json';
  const instance = new Index();
 
  describe('Read book data', () => {
