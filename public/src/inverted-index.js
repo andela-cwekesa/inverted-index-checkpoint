@@ -171,7 +171,5 @@ class Index {
     return searchResults;
   }
 }
-// export { Index as default };
 window.Index = Index;
-// module.exports = Index;
 export default Index;
