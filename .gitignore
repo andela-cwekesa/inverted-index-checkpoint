@@ -19,7 +19,6 @@ build
 node_modules
 uploads
 public/vendor
-public/dist
 public/design
 test-tmp
 .DS_Store
