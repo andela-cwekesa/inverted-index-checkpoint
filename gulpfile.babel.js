@@ -60,8 +60,17 @@ gulp.task('test1', ['pre-test'], () => {
   gulp.watch('./public/src/*.js').on('change', browserSync2.reload);
 });
 
+gulp.task('travis-test', ['pre-test'], () => {
+  browserSync2.init({
+    server: {
+      baseDir: ['./public/dist/', './jasmine'] }
+  });
+  gulp.watch('./jasmine/spec/*.js').on('change', browserSync2.reload);
+  gulp.watch('./public/src/*.js').on('change', browserSync2.reload);
+});
+
 gulp.task('test', ['pre-test'], () => {
-  gulp.src('./jasmine/spec/inverted-index-test.js')
+  gulp.src(['./jasmine/spec/inverted-index-test.js', './public/src/inverted-index.js'])
     .pipe(jasmine())
     .pipe(istanbul.writeReports());
 });
