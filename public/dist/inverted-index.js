@@ -25,10 +25,9 @@ var Index = function () {
   /**
    * @method fileCheck
    *
-   * checks if file is empty, valid or object
+   * Checks if file is empty, valid or object
    *
    * @param {string} fileContents
-   * @returns {object}
    */
 
 
@@ -50,10 +49,13 @@ var Index = function () {
         };
       }
     }
+
     /**
      * @method isJSON
+     *
+     * Converts passed string into a JSON object
+     *
      * @param {string} fileData
-     * param
      */
 
   }, {
@@ -70,7 +72,7 @@ var Index = function () {
     /**
      * @method sanitizeInput
      *
-     * it sanitizes input to alphanumeric only
+     * It sanitizes input to alphanumeric only
      *
      * @param {string} content
      * @returns {string} return characters
@@ -84,76 +86,48 @@ var Index = function () {
     }
 
     /**
-     * @method checkIndex
-     *
-     * Method which accepts `required` params for indexing a
-     * json file.
-     * it stores indices in an object ==> this.indices.
-     *
-     * @param {array} words
-     * @param {string} file
-     * @param {number} id
-     */
-
-  }, {
-    key: 'checkIndex',
-    value: function checkIndex(words, file, id) {
-      var _this = this;
-
-      words.forEach(function (word) {
-        var theword = _this.sanitizeInput(word);
-        if (!_this.indices[file][theword]) {
-          _this.indices[file][theword] = new Set();
-          _this.indices[file][theword].add(id);
-        }
-        _this.indices[file][theword].add(id);
-      });
-    }
-
-    /**
      * @method createIndex
      *
-     * method that creates indices
+     * Method that creates indices
      *
+     * @param {string} fileName
      * @param {object} fileContents
-     * @returns {object} check
      */
 
   }, {
     key: 'createIndex',
     value: function createIndex(fileName, fileContents) {
-      var _this2 = this;
+      var _this = this;
 
       var obj = {
         name: fileName,
         files: fileContents
       };
       var check = this.fileCheck(obj);
-      if (check.type === 'fileEmpty') {
-        swal({
-          title: 'Empty File!',
-          text: 'It looks like you uploaded an empty JSON file.',
-          type: 'error',
-          confirmButtonText: 'Close',
-          timer: 2500
-        });
-      } else if (check.type === 'fileValid') {
+      if (check.type === 'fileValid') {
         var filesToBeIndexed = fileContents;
         this.indices[fileName] = {
-          fileLen: filesToBeIndexed.length
+          filesToBeIndexed: filesToBeIndexed
         };
         filesToBeIndexed.forEach(function (doc, index) {
           var splitTextAndTitle = (doc.text + ' ' + doc.title).split(' ');
-          _this2.checkIndex(splitTextAndTitle, fileName, index);
+          splitTextAndTitle.forEach(function (word) {
+            var theword = _this.sanitizeInput(word);
+            if (!_this.indices[fileName][theword]) {
+              _this.indices[fileName][theword] = new Set();
+              _this.indices[fileName][theword].add(index);
+            }
+            _this.indices[fileName][theword].add(index);
+          });
         });
-        return check;
       }
+      return check;
     }
 
     /**
      * @method getIndex
      *
-     * method return index of files in indices object
+     * Method return index of files in indices object
      *
      * @param {string} name
      * @returns {object}
@@ -171,7 +145,7 @@ var Index = function () {
     /**
      * @method searchFeedback
      *
-     * takes terms of array and fetch result of each token.
+     * Takes terms of array and fetch result of each token.
      *
      * @param {array} termsArray
      * @param {object} file
@@ -195,29 +169,29 @@ var Index = function () {
     /**
      * @method searchIndex
      *
-     * looks for search terms in created index
+     * Looks for search terms in created index
      *
-     * @param {object} currFile
+     * @param {object} currentFile
      * @param {array} searchTerm
      * @returns {object} searchResults
      */
 
   }, {
     key: 'searchIndex',
-    value: function searchIndex(currFile) {
-      var _this3 = this;
+    value: function searchIndex(currentFile) {
+      var _this2 = this;
 
       var searchResults = {};
       var termsArray = [];
       termsArray = this.sanitizeInput(arguments.length <= 1 ? undefined : arguments[1]);
-      if (!currFile) {
+      if (!currentFile) {
         Object.keys(this.indices).forEach(function (fileName) {
-          searchResults[fileName] = _this3.searchFeedback(termsArray, _this3.indices[fileName]);
+          searchResults[fileName] = _this2.searchFeedback(termsArray, _this2.indices[fileName]);
         });
       } else {
         try {
-          var file = this.indices[currFile];
-          searchResults[currFile] = this.searchFeedback(termsArray, file);
+          var file = this.indices[currentFile];
+          searchResults[currentFile] = this.searchFeedback(termsArray, file);
         } catch (e) {
           return null;
         }

@@ -61,28 +61,6 @@ class Index {
   }
 
 /**
- * @method checkIndex
- *
- * Method which accepts `required` params for indexing a
- * json file.
- * It stores indices in an object ==> this.indices.
- *
- * @param {array} words
- * @param {string} file
- * @param {number} id
- */
-  checkIndex(words, file, id) {
-    words.forEach((word) => {
-      const theword = this.sanitizeInput(word);
-      if (!this.indices[file][theword]) {
-        this.indices[file][theword] = new Set();
-        this.indices[file][theword].add(id);
-      }
-      this.indices[file][theword].add(id);
-    });
-  }
-
-/**
  * @method createIndex
  *
  * Method that creates indices
@@ -96,25 +74,24 @@ class Index {
       files: fileContents,
     };
     const check = this.fileCheck(obj);
-    if (check.type === 'fileEmpty') {
-      swal({
-        title: 'Empty File!',
-        text: 'It looks like you uploaded an empty JSON file.',
-        type: 'error',
-        confirmButtonText: 'Close',
-        timer: 2500,
-      });
-    } else if (check.type === 'fileValid') {
+    if (check.type === 'fileValid') {
       const filesToBeIndexed = fileContents;
       this.indices[fileName] = {
-        fileLen: filesToBeIndexed.length,
+        filesToBeIndexed,
       };
       filesToBeIndexed.forEach((doc, index) => {
         const splitTextAndTitle = `${doc.text} ${doc.title}`.split(' ');
-        this.checkIndex(splitTextAndTitle, fileName, index);
+        splitTextAndTitle.forEach((word) => {
+          const theword = this.sanitizeInput(word);
+          if (!this.indices[fileName][theword]) {
+            this.indices[fileName][theword] = new Set();
+            this.indices[fileName][theword].add(index);
+          }
+          this.indices[fileName][theword].add(index);
+        });
       });
-      return check;
     }
+    return check;
   }
 
 /**

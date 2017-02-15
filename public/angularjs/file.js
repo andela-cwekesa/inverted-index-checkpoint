@@ -62,17 +62,10 @@ app.controller('myController', ($scope, $timeout) => {
       try {
         JSON.parse(stringified);
         const success = obj.createIndex(fileContents.name, fileContents.files);
-        if (success) {
-          swal({
-            title: 'Success!',
-            text: 'The index was created successfully.',
-            type: 'success',
-            confirmButtonText: 'Close',
-            timer: 2000,
-          });
+        if (success.type === 'fileValid') {
           const result = obj.getIndex();
-          const fileLength = result[fileContents.name].fileLen;
-          delete result[fileContents.name].fileLen;
+          const fileLength = result[fileContents.name].filesToBeIndexed.length;
+          delete result[fileContents.name].filesToBeIndexed;
           $timeout(() => {
             $scope.container[fileContents.name] = {
               dataAfterIndexed: result[fileContents.name],
@@ -81,6 +74,14 @@ app.controller('myController', ($scope, $timeout) => {
               })(),
             };
           }, 200);
+        } else if (success.type === 'fileEmpty') {
+          swal({
+              title: 'Empty File!',
+              text: 'It looks like you uploaded an empty JSON file.',
+              type: 'error',
+              confirmButtonText: 'Close',
+              timer: 2500,
+            });
         } else {
           swal({
             title: 'Unsuccessful.',
@@ -101,7 +102,7 @@ app.controller('myController', ($scope, $timeout) => {
       }
     };
 
-  $scope.searchIndex = () => {
+$scope.searchIndex = () => {
     const fName = $scope.selectedFile;
     const txtSearch = $scope.txtSearch;
     if (!txtSearch) {
