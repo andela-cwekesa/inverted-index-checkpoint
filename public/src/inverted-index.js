@@ -12,7 +12,7 @@ class Index {
  *
  * Checks if file is empty, valid or object
  *
- * @param {string} fileContents
+ * @param {object} fileContents
  */
   fileCheck(fileContents) {
     if (!fileContents.files) {
