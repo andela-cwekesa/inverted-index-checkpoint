@@ -18,14 +18,12 @@ class Index {
     if (!fileContents.files) {
       return this.message = {
         type: 'fileEmpty',
-        status: false,
         message: `${fileContents.name} ${'is empty!'}`,
       };
     }
     if (typeof fileContents === 'object') {
       return this.message = {
         type: 'fileValid',
-        status: true,
         message: `${fileContents.name} ${' has been indexed successfully.'}`,
       };
     }
