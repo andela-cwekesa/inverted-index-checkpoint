@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/andela-cwekesa/inverted-index-checkpoint.svg?branch=develop)](https://travis-ci.org/andela-cwekesa/inverted-index-checkpoint)
-[![Coverage Status](https://coveralls.io/repos/github/andela-cwekesa/inverted-index-check-point-one/badge.svg?branch=17th-feedback-implementation)](https://coveralls.io/github/andela-cwekesa/inverted-index-check-point-one?branch=17th-feedback-implementation)
+[![Coverage Status](https://coveralls.io/repos/github/andela-cwekesa/inverted-index-check-point-one/badge.svg?branch=develop)](https://coveralls.io/github/andela-cwekesa/inverted-index-check-point-one?branch=develop)
 <br>
 # inverted-index
 
