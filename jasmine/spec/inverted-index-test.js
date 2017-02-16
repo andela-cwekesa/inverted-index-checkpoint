@@ -60,6 +60,10 @@ describe('Read Book Data', () => {
   it('verifies that JSON array is not empty.', () => {
     expect(instance.isJSON(testData).length).toBe(2);
   });
+
+  it('verifies that when JSON file is invalid a false is returned by isJSON method.', () => {
+    expect(instance.isJSON(emptyJSON)).toBe(false);
+  });
 });
 
 describe('Populate Index', () => {
@@ -110,6 +114,10 @@ describe('Search index', () => {
     expect(instance.searchIndex(testFile.name, 'alice')).toEqual({ testFile: { alice: [0] } });
     expect(instance.searchIndex(testFile.name, 'of')).toEqual({ testFile: { of: [0, 1] } });
     expect(instance.searchIndex(testFile.name, 'lord')).toEqual({ testFile: { lord: [1] } });
+  });
+
+  it('should return null if file passed is not found', () => {
+    expect(instance.searchIndex('notFound.json', 'alice')).toBe(null);
   });
 
   it('should search an array of terms', () => {
