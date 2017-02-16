@@ -21,7 +21,7 @@ Elastic search uses a structure called an inverted index, which is designed to a
 --------
 1.Clone this repository to your local machine: 
 <br>
-<code>git clone https://github.com/andela-cwekesa/inverted-index-check-point-one.git</code>
+<code>git clone https://github.com/andela-cwekesa/inverted-index-checkpoint/tree/issues-fix</code>
 <br>
 2.Navigate to the directory via the terminal.<b>Note:</b>If you downloaded instead of cloning please unzip first the file.
 <br>
