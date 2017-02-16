@@ -4,8 +4,7 @@
   "description": "Inverted index checkpoint one ",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run",
-    "coverage": "cat ./coverage/lcov.info |  ./node_modules/coveralls/bin/coveralls.js"
+    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",
