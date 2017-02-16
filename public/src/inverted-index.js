@@ -1,19 +1,21 @@
-/** @class representing an Index. */
-class Index {
 /**
-* Constructor initializes indices to an empty object.
+* @class representing an Index
 */
+class Index {
+  /**
+  * Constructor initializes indices to an empty object
+  */
   constructor() {
     this.indices = {};
   }
 
-/**
- * @method fileCheck
- *
- * Checks if file is empty, valid or object
- *
- * @param {object} fileContents
- */
+  /**
+  * @method fileCheck
+  *
+  * Checks if file is empty, valid or object
+  *
+  * @param {object} fileContents
+  */
   fileCheck(fileContents) {
     if (!fileContents.files) {
       return this.message = {
@@ -29,13 +31,13 @@ class Index {
     }
   }
 
-/**
- * @method isJSON
- *
- * Converts passed string into a JSON object
- *
- * @param {string} fileData
- */
+  /**
+  * @method isJSON
+  *
+  * Converts contents of the file into a JSON object
+  *
+  * @param {object} fileData
+  */
   isJSON(fileData) {
     fileData = typeof fileData !== 'string' ? JSON.stringify(fileData) : fileData;
     try {
@@ -45,27 +47,27 @@ class Index {
     }
   }
 
-/**
- * @method sanitizeInput
- *
- * It sanitizes input to alphanumeric only
- *
- * @param {string} content
- * @returns {string} return characters
- */
+  /**
+  * @method sanitizeInput
+  *
+  * It sanitizes input to alphanumeric only
+  *
+  * @param {string} content
+  * @returns {string} return characters
+  */
   sanitizeInput(content) {
     const characters = content.trim().replace(/[^a-z0-9 ]/gi, '').toLowerCase().split(' ');
     return characters;
   }
 
-/**
- * @method createIndex
- *
- * Method that creates indices
- *
- * @param {string} fileName
- * @param {object} fileContents
- */
+  /**
+  * @method createIndex
+  *
+  * Method that creates indices
+  *
+  * @param {string} fileName
+  * @param {object} fileContents
+  */
   createIndex(fileName, fileContents) {
     const obj = {
       name: fileName,
@@ -92,14 +94,14 @@ class Index {
     return check;
   }
 
-/**
- * @method getIndex
- *
- * Method return index of files in indices object
- *
- * @param {string} name
- * @returns {object}
- */
+  /**
+  * @method getIndex
+  *
+  * Method return index of files in indices object
+  *
+  * @param {string} name
+  * @returns {object}
+  */
   getIndex(name) {
     if (name && typeof name === 'string') {
       return this.indices[name];
@@ -107,15 +109,15 @@ class Index {
     return this.indices;
   }
 
-/**
- * @method searchFeedback
- *
- * Takes terms of array and fetch result of each token.
- *
- * @param {array} termsArray
- * @param {object} file
- * @returns {object} searchResults
- */
+  /**
+  * @method searchFeedback
+  *
+  * Takes terms of array and fetch result of each token.
+  *
+  * @param {array} termsArray
+  * @param {object} file
+  * @returns {object} searchResults
+  */
   searchFeedback(termsArray, file) {
     const searchResults = {};
     termsArray.forEach((term, index) => {
@@ -128,15 +130,15 @@ class Index {
     return searchResults;
   }
 
-/**
- * @method searchIndex
- *
- * Looks for search terms in created index
- *
- * @param {object} currentFile
- * @param {array} searchTerm
- * @returns {object} searchResults
- */
+  /**
+  * @method searchIndex
+  *
+  * Looks for search terms in created index
+  *
+  * @param {object} currentFile
+  * @param {array} searchTerm
+  * @returns {object} searchResults
+  */
   searchIndex(currentFile, ...searchTerm) {
     const searchResults = {};
     let termsArray = [];

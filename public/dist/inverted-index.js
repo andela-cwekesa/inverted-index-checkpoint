@@ -11,10 +11,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/** @class representing an Index. */
+/**
+* @class representing an Index
+*/
 var Index = function () {
   /**
-  * Constructor initializes indices to an empty object.
+  * Constructor initializes indices to an empty object
   */
   function Index() {
     _classCallCheck(this, Index);
@@ -23,12 +25,12 @@ var Index = function () {
   }
 
   /**
-   * @method fileCheck
-   *
-   * Checks if file is empty, valid or object
-   *
-   * @param {string} fileContents
-   */
+  * @method fileCheck
+  *
+  * Checks if file is empty, valid or object
+  *
+  * @param {object} fileContents
+  */
 
 
   _createClass(Index, [{
@@ -49,12 +51,12 @@ var Index = function () {
     }
 
     /**
-     * @method isJSON
-     *
-     * Converts passed string into a JSON object
-     *
-     * @param {string} fileData
-     */
+    * @method isJSON
+    *
+    * Converts contents of the file into a JSON object
+    *
+    * @param {object} fileData
+    */
 
   }, {
     key: 'isJSON',
@@ -68,13 +70,13 @@ var Index = function () {
     }
 
     /**
-     * @method sanitizeInput
-     *
-     * It sanitizes input to alphanumeric only
-     *
-     * @param {string} content
-     * @returns {string} return characters
-     */
+    * @method sanitizeInput
+    *
+    * It sanitizes input to alphanumeric only
+    *
+    * @param {string} content
+    * @returns {string} return characters
+    */
 
   }, {
     key: 'sanitizeInput',
@@ -84,13 +86,13 @@ var Index = function () {
     }
 
     /**
-     * @method createIndex
-     *
-     * Method that creates indices
-     *
-     * @param {string} fileName
-     * @param {object} fileContents
-     */
+    * @method createIndex
+    *
+    * Method that creates indices
+    *
+    * @param {string} fileName
+    * @param {object} fileContents
+    */
 
   }, {
     key: 'createIndex',
@@ -123,13 +125,13 @@ var Index = function () {
     }
 
     /**
-     * @method getIndex
-     *
-     * Method return index of files in indices object
-     *
-     * @param {string} name
-     * @returns {object}
-     */
+    * @method getIndex
+    *
+    * Method return index of files in indices object
+    *
+    * @param {string} name
+    * @returns {object}
+    */
 
   }, {
     key: 'getIndex',
@@ -141,14 +143,14 @@ var Index = function () {
     }
 
     /**
-     * @method searchFeedback
-     *
-     * Takes terms of array and fetch result of each token.
-     *
-     * @param {array} termsArray
-     * @param {object} file
-     * @returns {object} searchResults
-     */
+    * @method searchFeedback
+    *
+    * Takes terms of array and fetch result of each token.
+    *
+    * @param {array} termsArray
+    * @param {object} file
+    * @returns {object} searchResults
+    */
 
   }, {
     key: 'searchFeedback',
@@ -165,14 +167,14 @@ var Index = function () {
     }
 
     /**
-     * @method searchIndex
-     *
-     * Looks for search terms in created index
-     *
-     * @param {object} currentFile
-     * @param {array} searchTerm
-     * @returns {object} searchResults
-     */
+    * @method searchIndex
+    *
+    * Looks for search terms in created index
+    *
+    * @param {object} currentFile
+    * @param {array} searchTerm
+    * @returns {object} searchResults
+    */
 
   }, {
     key: 'searchIndex',
