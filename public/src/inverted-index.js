@@ -29,11 +29,11 @@ class Index {
         message: `${fileContents.name} ${' has been indexed successfully.'}`,
       };
     }
-    if (Object.keys(fileContents.files[0]).includes('text', 'title') && Object.keys(fileContents.files[1]).includes('text', 'title')){
-        return this.message = {
-          type: 'rightFile',
-          message: `${fileContents.name} ${'is right.'}`,
-        };
+    if (Object.keys(fileContents.files[0]).includes('text', 'title') && Object.keys(fileContents.files[1]).includes('text', 'title')) {
+      return this.message = {
+        type: 'rightFile',
+        message: `${fileContents.name} ${'is right.'}`,
+      };
     }
   }
 
