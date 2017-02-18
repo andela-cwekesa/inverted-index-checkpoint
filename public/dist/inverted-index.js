@@ -48,6 +48,12 @@ var Index = function () {
           message: fileContents.name + ' ' + ' has been indexed successfully.'
         };
       }
+      if (Object.keys(fileContents.files[0]).includes('text', 'title') && Object.keys(fileContents.files[1]).includes('text', 'title')) {
+        return this.message = {
+          type: 'rightFile',
+          message: fileContents.name + ' ' + 'is right.'
+        };
+      }
     }
 
     /**
@@ -63,7 +69,8 @@ var Index = function () {
     value: function isJSON(fileData) {
       fileData = typeof fileData !== 'string' ? JSON.stringify(fileData) : fileData;
       try {
-        return JSON.parse(fileData);
+        JSON.parse(fileData);
+        return true;
       } catch (error) {
         return false;
       }
@@ -136,14 +143,11 @@ var Index = function () {
   }, {
     key: 'getIndex',
     value: function getIndex(name) {
-      if (name && typeof name === 'string') {
-        return this.indices[name];
-      }
-      return this.indices;
+      return name && typeof name === 'string' ? this.indices[name] : this.indices;
     }
 
     /**
-    * @method searchFeedback
+    * @method doSearch
     *
     * Takes terms of array and fetch result of each token.
     *
@@ -153,12 +157,12 @@ var Index = function () {
     */
 
   }, {
-    key: 'searchFeedback',
-    value: function searchFeedback(termsArray, file) {
+    key: 'doSearch',
+    value: function doSearch(termsArray, fileIndex) {
       var searchResults = {};
       termsArray.forEach(function (term, index) {
-        if (file.hasOwnProperty(term)) {
-          searchResults[termsArray[index]] = Array.from(file[term]);
+        if (fileIndex.hasOwnProperty(term)) {
+          searchResults[termsArray[index]] = Array.from(fileIndex[term]);
         } else {
           searchResults[term] = [];
         }
@@ -182,16 +186,15 @@ var Index = function () {
       var _this2 = this;
 
       var searchResults = {};
-      var termsArray = [];
-      termsArray = this.sanitizeInput(arguments.length <= 1 ? undefined : arguments[1]);
+      var termsArray = this.sanitizeInput(arguments.length <= 1 ? undefined : arguments[1]);
       if (!currentFile) {
         Object.keys(this.indices).forEach(function (fileName) {
-          searchResults[fileName] = _this2.searchFeedback(termsArray, _this2.indices[fileName]);
+          searchResults[fileName] = _this2.doSearch(termsArray, _this2.indices[fileName]);
         });
       } else {
         try {
           var file = this.indices[currentFile];
-          searchResults[currentFile] = this.searchFeedback(termsArray, file);
+          searchResults[currentFile] = this.doSearch(termsArray, file);
         } catch (e) {
           return null;
         }
