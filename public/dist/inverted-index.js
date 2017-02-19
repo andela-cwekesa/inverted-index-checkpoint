@@ -191,7 +191,6 @@ var Index = function () {
     key: 'searchIndex',
     value: function searchIndex(selectedFile) {
       var _this3 = this;
-console.log(selectedFile)
       var searchResults = {};
       var termsArray = this.sanitizeInput(arguments.length <= 1 ? undefined : arguments[1]);
       if (!selectedFile) {
