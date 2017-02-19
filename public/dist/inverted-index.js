@@ -36,22 +36,29 @@ var Index = function () {
   _createClass(Index, [{
     key: 'fileCheck',
     value: function fileCheck(fileContents) {
+      var _this = this;
+
       if (!fileContents.files) {
         return this.message = {
           type: 'fileEmpty',
           message: fileContents.name + ' ' + 'is empty!'
         };
       }
+      var theDocs = fileContents.files.map(function (doc) {
+        return fileContents.files[doc];
+      });
+      Object.keys(theDocs).forEach(function (eachDoc) {
+        if (!Object.keys(fileContents.files[eachDoc]).includes('text', 'title')) {
+          return _this.message = {
+            type: 'fileWrong',
+            message: fileContents.name + ' ' + 'is a wrong file.'
+          };
+        }
+      });
       if ((typeof fileContents === 'undefined' ? 'undefined' : _typeof(fileContents)) === 'object') {
         return this.message = {
           type: 'fileValid',
           message: fileContents.name + ' ' + ' has been indexed successfully.'
-        };
-      }
-      if (Object.keys(fileContents.files[0]).includes('text', 'title') && Object.keys(fileContents.files[1]).includes('text', 'title')) {
-        return this.message = {
-          type: 'rightFile',
-          message: fileContents.name + ' ' + 'is right.'
         };
       }
     }
@@ -104,7 +111,7 @@ var Index = function () {
   }, {
     key: 'createIndex',
     value: function createIndex(fileName, fileContents) {
-      var _this = this;
+      var _this2 = this;
 
       var obj = {
         name: fileName,
@@ -119,12 +126,12 @@ var Index = function () {
         filesToBeIndexed.forEach(function (doc, index) {
           var splitTextAndTitle = (doc.text + ' ' + doc.title).split(' ');
           splitTextAndTitle.forEach(function (word) {
-            var theword = _this.sanitizeInput(word);
-            if (!_this.indices[fileName][theword]) {
-              _this.indices[fileName][theword] = new Set();
-              _this.indices[fileName][theword].add(index);
+            var theword = _this2.sanitizeInput(word);
+            if (!_this2.indices[fileName][theword]) {
+              _this2.indices[fileName][theword] = new Set();
+              _this2.indices[fileName][theword].add(index);
             }
-            _this.indices[fileName][theword].add(index);
+            _this2.indices[fileName][theword].add(index);
           });
         });
       }
@@ -175,26 +182,26 @@ var Index = function () {
     *
     * Looks for search terms in created index
     *
-    * @param {object} currentFile
-    * @param {array} searchTerm
+    * @param {object} selectedFile
+    * @param {array} searchTerms
     * @returns {object} searchResults
     */
 
   }, {
     key: 'searchIndex',
-    value: function searchIndex(currentFile) {
-      var _this2 = this;
-
+    value: function searchIndex(selectedFile) {
+      var _this3 = this;
+console.log(selectedFile)
       var searchResults = {};
       var termsArray = this.sanitizeInput(arguments.length <= 1 ? undefined : arguments[1]);
-      if (!currentFile) {
+      if (!selectedFile) {
         Object.keys(this.indices).forEach(function (fileName) {
-          searchResults[fileName] = _this2.doSearch(termsArray, _this2.indices[fileName]);
+          searchResults[fileName] = _this3.doSearch(termsArray, _this3.indices[fileName]);
         });
       } else {
         try {
-          var file = this.indices[currentFile];
-          searchResults[currentFile] = this.doSearch(termsArray, file);
+          var file = this.indices[selectedFile];
+          searchResults[selectedFile] = this.doSearch(termsArray, file);
         } catch (e) {
           return null;
         }
