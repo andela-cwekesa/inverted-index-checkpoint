@@ -23,16 +23,21 @@ class Index {
         message: `${fileContents.name} ${'is empty!'}`,
       };
     }
+    const theDocs = fileContents.files.map((doc) => {
+      return fileContents.files[doc];
+    });
+    Object.keys(theDocs).forEach((eachDoc) => {
+      if (!Object.keys(fileContents.files[eachDoc]).includes('text', 'title')) {
+        return this.message = {
+          type: 'fileWrong',
+          message: `${fileContents.name} ${'is a wrong file.'}`,
+        };
+      }
+    });
     if (typeof fileContents === 'object') {
       return this.message = {
         type: 'fileValid',
         message: `${fileContents.name} ${' has been indexed successfully.'}`,
-      };
-    }
-    if (Object.keys(fileContents.files[0]).includes('text', 'title') && Object.keys(fileContents.files[1]).includes('text', 'title')) {
-      return this.message = {
-        type: 'rightFile',
-        message: `${fileContents.name} ${'is right.'}`,
       };
     }
   }
@@ -109,7 +114,11 @@ class Index {
   * @param {string} name
   * @returns {object}
   */
-  getIndex(name) { return name && typeof name === 'string' ? this.indices[name] : this.indices; }
+  getIndex(name) {
+    return name && typeof name === 'string' ?
+      this.indices[name] : this.indices;
+  }
+
 
   /**
   * @method doSearch
@@ -137,21 +146,21 @@ class Index {
   *
   * Looks for search terms in created index
   *
-  * @param {object} currentFile
-  * @param {array} searchTerm
+  * @param {object} selectedFile
+  * @param {array} searchTerms
   * @returns {object} searchResults
   */
-  searchIndex(currentFile, ...searchTerm) {
+  searchIndex(selectedFile, ...searchTerms) {
     const searchResults = {};
-    const termsArray = this.sanitizeInput(searchTerm[0]);
-    if (!currentFile) {
+    const termsArray = this.sanitizeInput(searchTerms[0]);
+    if (!selectedFile) {
       Object.keys(this.indices).forEach((fileName) => {
         searchResults[fileName] = this.doSearch(termsArray, this.indices[fileName]);
       });
     } else {
       try {
-        const file = this.indices[currentFile];
-        searchResults[currentFile] = this.doSearch(termsArray, file);
+        const file = this.indices[selectedFile];
+        searchResults[selectedFile] = this.doSearch(termsArray, file);
       } catch (e) {
         return null;
       }
