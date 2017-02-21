@@ -50,10 +50,10 @@ app.controller('myController', ($scope, $timeout) => {
   $scope.beforeIndex = {};
   $scope.container = {};
   const obj = new Index();
-  $scope.loadFile =  () => {
+  $scope.loadFile = () => {
     $timeout(() => {
       $scope.beforeIndex[$scope.file.name] = angular.copy($scope.file);
-    } , 200);
+    }, 200);
   };
 
   $scope.createIndex = (fName) => {
@@ -76,12 +76,12 @@ app.controller('myController', ($scope, $timeout) => {
         }, 200);
       } else if (success.type === 'fileEmpty') {
         swal({
-            title: 'Empty File!',
-            text: 'It looks like you uploaded an empty JSON file.',
-            type: 'error',
-            confirmButtonText: 'Close',
-            timer: 2500,
-          });
+          title: 'Empty File!',
+          text: 'It looks like you uploaded an empty JSON file.',
+          type: 'error',
+          confirmButtonText: 'Close',
+          timer: 2500,
+        });
       } else {
         swal({
           title: 'Unsuccessful.',
@@ -93,42 +93,46 @@ app.controller('myController', ($scope, $timeout) => {
       }
     } catch (e) {
       swal({
-          title: 'Error!',
-          text: 'The operation was not successful.',
-          type: 'error',
-          confirmButtonText: 'Close',
-          timer: 2000,
-        });
+        title: 'Error!',
+        text: 'The operation was not successful.',
+        type: 'error',
+        confirmButtonText: 'Close',
+        timer: 2000,
+      });
     }
   };
 
   $scope.searchIndex = () => {
-      const fName = $scope.selectedFile;
-      const txtSearch = $scope.txtSearch;
-      if (!txtSearch) {
-        swal({
-          title: 'No search item.',
-          text: 'You haven\'t provided anything to be searched.',
-          type: 'warning',
-          confirmButtonText: 'Close',
-          timer: 2000,
-        });
-      } else if (Object.keys($scope.beforeIndex).length <= 0) {
-        swal({
-          title: 'Not Found!',
-          text: 'Unable to find an indexed file.',
-          type: 'warning',
-          confirmButtonText: 'Close',
-          timer: 2000,
-        });
-      } else {
-        $scope.searchResults = obj.searchIndex(fName, txtSearch);
+    const fName = $scope.selectedFile;
+    const txtSearch = $scope.txtSearch;
+    if (!txtSearch) {
+      swal({
+        title: 'No search item.',
+        text: 'You haven\'t provided anything to be searched.',
+        type: 'warning',
+        confirmButtonText: 'Close',
+        timer: 2000,
+      });
+    } else if (Object.keys($scope.beforeIndex).length <= 0) {
+      swal({
+        title: 'Not Found!',
+        text: 'Unable to find an indexed file.',
+        type: 'warning',
+        confirmButtonText: 'Close',
+        timer: 2000,
+      });
+    } else {
+      const terms = obj.sanitizeInput(txtSearch);
+      if (fName) {
+        terms.unshift(fName);
       }
-      for(let i in $scope.searchResults) {
-        $scope.beforeIndex[i] = {
-          name: i,
-          index: $scope.searchResults[i],
-        };
-      }
-    };
+      $scope.searchResults = obj.searchIndex(terms);
+    }
+    Object.keys($scope.searchResults).forEach((i) => {
+      $scope.beforeIndex[i] = {
+        name: i,
+        index: $scope.searchResults[i],
+      };
+    });
+  };
 });
