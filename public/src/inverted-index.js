@@ -119,7 +119,6 @@ class Index {
       this.indices[name] : this.indices;
   }
 
-
   /**
   * @method doSearch
   *
@@ -150,9 +149,17 @@ class Index {
   * @param {array} searchTerms
   * @returns {object} searchResults
   */
-  searchIndex(selectedFile, ...searchTerms) {
+  searchIndex(searchTerms) {
+    let selectedFile = null;
+    let termsArray;
+    if (searchTerms[0].includes('.json')) {
+      selectedFile = searchTerms[0];
+      termsArray = (`${searchTerms.slice(1)}`.split(/\W/)).filter((term) => { if (term) return term; });
+    } else {
+      selectedFile = null;
+      termsArray = (`${searchTerms}`.split(/\W/)).filter((term) => { if (term) return term; });
+    }
     const searchResults = {};
-    const termsArray = this.sanitizeInput(searchTerms[0]);
     if (!selectedFile) {
       Object.keys(this.indices).forEach((fileName) => {
         searchResults[fileName] = this.doSearch(termsArray, this.indices[fileName]);
