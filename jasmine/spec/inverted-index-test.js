@@ -26,7 +26,7 @@ describe('Inverted Index Tests', () => {
   const instance = new Index();
 
   const testFile = {
-    name: 'testFile',
+    name: 'testFile.json',
     files: testData,
   };
 
@@ -84,29 +84,29 @@ describe('Inverted Index Tests', () => {
     });
 
     it('ensures index is not overwritten', () => {
-      expect(Object.keys(instance.getIndex(this.indices))).toEqual(['testData', 'testFile', 'testFile2']);
+      expect(Object.keys(instance.getIndex(this.indices))).toEqual(['testData', 'testFile.json', 'testFile2']);
     });
   });
 
   describe('Search index', () => {
     it('should check that search index returns correct results', () => {
-      expect(instance.searchIndex(testFile.name, 'alice')).toEqual({ testFile: { alice: [0] } });
+      expect(instance.searchIndex([testFile.name, 'alice'])).toEqual({ 'testFile.json': { alice: [0] } });
     });
 
     it('should return null if file passed is not found', () => {
-      expect(instance.searchIndex('notFound.json', 'alice')).toBe(null);
+      expect(instance.searchIndex(['notFound.json', 'alice'])).toBe(null);
     });
 
     it('should search an array of terms', () => {
-      expect(instance.searchIndex(testFile.name, '["alice", "of", "a"]')).toEqual({ testFile: { alice: [0], of: [0, 1], a: [0, 1] } });
+      expect(instance.searchIndex([testFile.name, '["alice", "of", "a"]'])).toEqual({ 'testFile.json': { alice: [0], of: [0, 1], a: [0, 1] } });
     });
 
     it('should handle a varied number of search terms as arguments', () => {
-      expect(instance.searchIndex(testFile.name, 'dwarf, and, cow')).toEqual({ testFile: { dwarf: [1], and: [0, 1], cow: [] } });
+      expect(instance.searchIndex([testFile.name, 'dwarf', 'and', 'cow'])).toEqual({ 'testFile.json': { dwarf: [1], and: [0, 1], cow: [] } });
     });
 
     it('should go through all indexed files if the file name is not passed', () => {
-      expect(instance.searchIndex('', 'a, of')).toEqual({ testData: { a: [0, 1], of: [0, 1] }, testFile: { a: [0, 1], of: [0, 1] }, testFile2: { a: [0], of: [1] } });
+      expect(instance.searchIndex(['a', 'of'])).toEqual({ testData: { a: [0, 1], of: [0, 1] }, 'testFile.json': { a: [0, 1], of: [0, 1] }, testFile2: { a: [0], of: [1] } });
     });
   });
 });
