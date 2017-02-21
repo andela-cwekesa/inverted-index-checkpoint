@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "node_modules/karma/bin/karma start karma.conf.js --single-run",
+    "transpile": "node node_modules/gulp-cli/bin/gulp transpile",
     "coverage": "cat ./coverage/lcov.info |  ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {

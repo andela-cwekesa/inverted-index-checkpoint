@@ -20,6 +20,7 @@ node_modules
 uploads
 public/vendor
 public/design
+public/dist/inverted-index.js
 test-tmp
 .DS_Store
 jasmine/books.sublime-workspace
