@@ -1,19 +1,21 @@
-/** @class representing an Index. */
-class Index {
 /**
-* Constructor initializes indices to an empty object.
+* @class representing an Index
 */
+class Index {
+  /**
+  * Constructor initializes indices to an empty object
+  */
   constructor() {
     this.indices = {};
   }
 
-/**
- * @method fileCheck
- *
- * Checks if file is empty, valid or object
- *
- * @param {object} fileContents
- */
+  /**
+  * @method fileCheck
+  *
+  * Checks if file is empty, valid or object
+  *
+  * @param {object} fileContents
+  */
   fileCheck(fileContents) {
     if (!fileContents.files) {
       return this.message = {
@@ -21,6 +23,17 @@ class Index {
         message: `${fileContents.name} ${'is empty!'}`,
       };
     }
+    const theDocs = fileContents.files.map((doc) => {
+      return fileContents.files[doc];
+    });
+    Object.keys(theDocs).forEach((eachDoc) => {
+      if (!Object.keys(fileContents.files[eachDoc]).includes('text', 'title')) {
+        return this.message = {
+          type: 'fileWrong',
+          message: `${fileContents.name} ${'is a wrong file.'}`,
+        };
+      }
+    });
     if (typeof fileContents === 'object') {
       return this.message = {
         type: 'fileValid',
@@ -29,43 +42,44 @@ class Index {
     }
   }
 
-/**
- * @method isJSON
- *
- * Converts passed string into a JSON object
- *
- * @param {string} fileData
- */
+  /**
+  * @method isJSON
+  *
+  * Converts contents of the file into a JSON object
+  *
+  * @param {object} fileData
+  */
   isJSON(fileData) {
     fileData = typeof fileData !== 'string' ? JSON.stringify(fileData) : fileData;
     try {
-      return JSON.parse(fileData);
+      JSON.parse(fileData);
+      return true;
     } catch (error) {
       return false;
     }
   }
 
-/**
- * @method sanitizeInput
- *
- * It sanitizes input to alphanumeric only
- *
- * @param {string} content
- * @returns {string} return characters
- */
+  /**
+  * @method sanitizeInput
+  *
+  * It sanitizes input to alphanumeric only
+  *
+  * @param {string} content
+  * @returns {string} return characters
+  */
   sanitizeInput(content) {
     const characters = content.trim().replace(/[^a-z0-9 ]/gi, '').toLowerCase().split(' ');
     return characters;
   }
 
-/**
- * @method createIndex
- *
- * Method that creates indices
- *
- * @param {string} fileName
- * @param {object} fileContents
- */
+  /**
+  * @method createIndex
+  *
+  * Method that creates indices
+  *
+  * @param {string} fileName
+  * @param {object} fileContents
+  */
   createIndex(fileName, fileContents) {
     const obj = {
       name: fileName,
@@ -92,35 +106,33 @@ class Index {
     return check;
   }
 
-/**
- * @method getIndex
- *
- * Method return index of files in indices object
- *
- * @param {string} name
- * @returns {object}
- */
+  /**
+  * @method getIndex
+  *
+  * Method return index of files in indices object
+  *
+  * @param {string} name
+  * @returns {object}
+  */
   getIndex(name) {
-    if (name && typeof name === 'string') {
-      return this.indices[name];
-    }
-    return this.indices;
+    return name && typeof name === 'string' ?
+      this.indices[name] : this.indices;
   }
 
-/**
- * @method searchFeedback
- *
- * Takes terms of array and fetch result of each token.
- *
- * @param {array} termsArray
- * @param {object} file
- * @returns {object} searchResults
- */
-  searchFeedback(termsArray, file) {
+  /**
+  * @method doSearch
+  *
+  * Takes terms of array and fetch result of each token.
+  *
+  * @param {array} termsArray
+  * @param {object} file
+  * @returns {object} searchResults
+  */
+  doSearch(termsArray, fileIndex) {
     const searchResults = {};
     termsArray.forEach((term, index) => {
-      if (file.hasOwnProperty(term)) {
-        searchResults[termsArray[index]] = Array.from(file[term]);
+      if (fileIndex.hasOwnProperty(term)) {
+        searchResults[termsArray[index]] = Array.from(fileIndex[term]);
       } else {
         searchResults[term] = [];
       }
@@ -128,27 +140,34 @@ class Index {
     return searchResults;
   }
 
-/**
- * @method searchIndex
- *
- * Looks for search terms in created index
- *
- * @param {object} currentFile
- * @param {array} searchTerm
- * @returns {object} searchResults
- */
-  searchIndex(currentFile, ...searchTerm) {
+  /**
+  * @method searchIndex
+  *
+  * Looks for search terms in created index
+  *
+  * @param {object} selectedFile
+  * @param {array} searchTerms
+  * @returns {object} searchResults
+  */
+  searchIndex(searchTerms) {
+    let selectedFile = null;
+    let termsArray;
+    if (searchTerms[0].includes('.json')) {
+      selectedFile = searchTerms[0];
+      termsArray = (`${searchTerms.slice(1)}`.split(/\W/)).filter((term) => { if (term) return term; });
+    } else {
+      selectedFile = null;
+      termsArray = (`${searchTerms}`.split(/\W/)).filter((term) => { if (term) return term; });
+    }
     const searchResults = {};
-    let termsArray = [];
-    termsArray = this.sanitizeInput(searchTerm[0]);
-    if (!currentFile) {
+    if (!selectedFile) {
       Object.keys(this.indices).forEach((fileName) => {
-        searchResults[fileName] = this.searchFeedback(termsArray, this.indices[fileName]);
+        searchResults[fileName] = this.doSearch(termsArray, this.indices[fileName]);
       });
     } else {
       try {
-        const file = this.indices[currentFile];
-        searchResults[currentFile] = this.searchFeedback(termsArray, file);
+        const file = this.indices[selectedFile];
+        searchResults[selectedFile] = this.doSearch(termsArray, file);
       } catch (e) {
         return null;
       }
